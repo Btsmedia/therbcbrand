@@ -4,11 +4,10 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useCart } from './CartProvider';
 import { Search, User, Heart, Bag, Menu, Close, Flower } from './Icons';
+import { CATEGORIES } from '@/lib/categories';
 
-const NAV = [
-  ['beauty', 'Bath & beauty'], ['gadgets', 'Gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'],
-];
-const POPULAR = ['Hair dryer', 'Tripod', 'Lamp', 'Chopper', 'Speaker', 'Towel'];
+const NAV = CATEGORIES.slice(0, 5).map(([s, , short]) => [s, short]);
+const POPULAR = ['Mug', 'Journal', 'Keychain', 'Tote bag', 'Water bottle', 'Wedding souvenir'];
 
 export default function Header({ deal, announcement }) {
   const { count, setOpen, wish } = useCart();
@@ -55,9 +54,9 @@ export default function Header({ deal, announcement }) {
             <ul className="nav">
               <li><Link href="/shop" aria-current={current === 'all' ? 'page' : undefined}>Shop</Link>
                 <div className="mega"><div className="wrap">
-                  <div><h4>Bath &amp; beauty</h4><ul><li><Link href="/shop?cat=beauty">Hair tools</Link></li><li><Link href="/shop?cat=beauty">Skincare</Link></li><li><Link href="/shop?cat=beauty">Towels &amp; bath</Link></li><li><Link href="/shop?cat=beauty">View all beauty</Link></li></ul></div>
-                  <div><h4>Tech &amp; gadgets</h4><ul><li><Link href="/shop?cat=gadgets">Tripods &amp; stands</Link></li><li><Link href="/shop?cat=gadgets">Fill lights</Link></li><li><Link href="/shop?cat=gadgets">Speakers</Link></li><li><Link href="/shop?cat=gadgets">View all gadgets</Link></li></ul></div>
-                  <div><h4>Home</h4><ul><li><Link href="/shop?cat=kitchen">Kitchen helpers</Link></li><li><Link href="/shop?cat=lighting">Lighting</Link></li><li><Link href="/shop?cat=storage">Storage</Link></li><li><Link href="/shop?cat=decor">Decor</Link></li><li><Link href="/shop">The full marketplace</Link></li></ul></div>
+                  <div><h4>Make it personal</h4><ul><li><Link href="/shop?cat=custom">Name &amp; photo gifts</Link></li><li><Link href="/shop?cat=drinkware">Custom mugs &amp; bottles</Link></li><li><Link href="/shop?cat=stationery">Custom journals</Link></li><li><Link href="/shop?cat=custom">View all personalised</Link></li></ul></div>
+                  <div><h4>For occasions</h4><ul><li><Link href="/shop?cat=corporate">Wedding souvenirs</Link></li><li><Link href="/shop?cat=corporate">Birthday &amp; party packs</Link></li><li><Link href="/shop?cat=corporate">Corporate gifts</Link></li><li><Link href="/shop?cat=corporate">Bulk orders</Link></li></ul></div>
+                  <div><h4>Shop by type</h4><ul>{CATEGORIES.slice(1, 5).map(([s, l]) => <li key={s}><Link href={`/shop?cat=${s}`}>{l}</Link></li>)}<li><Link href="/shop">Shop everything</Link></li></ul></div>
                   {deal && <Link className="promo" href="/shop?sale=1"><img src={deal.img || '/img/7285.jpg'} alt="" /><div><strong>{deal.label}</strong><span>Up to {deal.maxOff}% off selected pieces</span></div></Link>}
                 </div></div>
               </li>
@@ -80,13 +79,8 @@ export default function Header({ deal, announcement }) {
         <div className="dr-head"><Link className="logo" href="/" style={{ fontSize: 26 }}>RBC</Link><button className="icon-btn" onClick={() => setMenu(false)} aria-label="Close menu"><Close /></button></div>
         <div />
         <nav className="mnav">
-          <MItem id="all" href="/shop">Shop all <small>Marketplace</small></MItem>
-          <MItem id="beauty" href="/shop?cat=beauty">Bath &amp; beauty <small>Hair · Skin · Bath</small></MItem>
-          <MItem id="gadgets" href="/shop?cat=gadgets">Tech &amp; gadgets <small>Tripods · Lights</small></MItem>
-          <MItem id="kitchen" href="/shop?cat=kitchen">Kitchen</MItem>
-          <MItem id="lighting" href="/shop?cat=lighting">Lighting</MItem>
-          <MItem id="storage" href="/shop?cat=storage">Storage</MItem>
-          <MItem id="decor" href="/shop?cat=decor">Decor</MItem>
+          <MItem id="all" href="/shop">Shop all <small>Every gift</small></MItem>
+          {CATEGORIES.map(([s, l, , hint]) => <MItem key={s} id={s} href={`/shop?cat=${s}`}>{l} <small>{hint}</small></MItem>)}
           <MItem id="sale" href="/shop?sale=1" style={{ color: 'var(--azalea)' }}>Deals</MItem>
           <MItem id="account" href="/account">My account</MItem>
         </nav>
@@ -96,7 +90,7 @@ export default function Header({ deal, announcement }) {
         <div className="wrap">
           <form className="s-bar" onSubmit={(e) => { e.preventDefault(); if (q.trim()) go(q.trim()); }}>
             <Search /><label htmlFor="q" style={{ position: 'absolute', left: -9999 }}>Search products</label>
-            <input id="q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search hair dryers, tripods, lamps…" autoComplete="off" />
+            <input id="q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search mugs, journals, keychains…" autoComplete="off" />
             <button type="button" className="icon-btn" onClick={() => setSearch(false)} aria-label="Close search"><Close /></button>
           </form>
           <div className="s-grid" style={{ gridTemplateColumns: '1fr' }}>

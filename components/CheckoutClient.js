@@ -5,8 +5,9 @@ import { useCart } from './CartProvider';
 import { Lock, Bag } from './Icons';
 import { naira } from '@/lib/format';
 import { totals, NG_STATES } from '@/lib/pricing';
+import { catLabel } from '@/lib/categories';
 
-const SHORT = { nationwide: 'Interstate in 1–3 days. GIG or DHL for farther places.', ife: 'Delivered on Fridays', pickup: 'Collect at our pickup point' };
+const SHORT = { nationwide: 'Interstate in 1–3 days. GIG or DHL for farther places.', ife: 'Local delivery', pickup: 'Collect at our pickup point' };
 
 const Field = ({ id, label, err, children }) => (
   <div className={`field ${err ? 'err' : ''}`}><label htmlFor={id}>{label}</label>{children}<span className="msg">{err}</span></div>
@@ -44,7 +45,7 @@ export default function CheckoutClient({ rates, products, email: signedEmail, ca
     const j = await r.json();
     if (!r.ok) return setCodeErr(j.error);
     const eligible = priced.some((l) => !j.category || (l.categories || []).includes(j.category));
-    if (!eligible) return setCodeErr(`${j.code} applies to ${j.category === 'beauty' ? 'bath & beauty' : j.category} items, and there are none in your cart.`);
+    if (!eligible) return setCodeErr(`${j.code} applies to ${catLabel(j.category).toLowerCase()} items, and there are none in your cart.`);
     setDiscount(j); setCode('');
   }
 

@@ -5,6 +5,7 @@ import { useCart } from './CartProvider';
 import { Heart } from './Icons';
 import Stars from './Stars';
 import { naira, pctOff } from '@/lib/format';
+import { catLabel } from '@/lib/categories';
 
 export default function ProductCard({ p, tone = 1 }) {
   const { add, wish, toggleWish } = useCart();
@@ -26,7 +27,7 @@ export default function ProductCard({ p, tone = 1 }) {
         <button className="wish" aria-pressed={wish.includes(p.id)} onClick={() => toggleWish(p.id)} aria-label={`Save ${p.name}`}><Heart /></button>
         {soldOut ? <button className="quick" disabled>Sold out</button> : <button className="quick" onClick={() => add(p, v)}>Quick add · {naira(p.price)}</button>}
       </div>
-      <p className="vendor">{p.categories.includes('gadgets') ? 'Tech & gadgets' : p.category === 'beauty' ? 'Bath & beauty' : p.category[0].toUpperCase() + p.category.slice(1)}</p>
+      <p className="vendor">{catLabel(p.category)}</p>
       <h3><Link href={href}>{p.name}</Link></h3>
       {p.reviewCount > 0 && <p className="rate"><Stars value={p.rating} />{p.rating.toFixed(1)} ({p.reviewCount})</p>}
       <p className="price"><span>{naira(p.price)}</span>{p.compare_at && <><s>{naira(p.compare_at)}</s><em>Save {naira(p.compare_at - p.price)}</em></>}</p>

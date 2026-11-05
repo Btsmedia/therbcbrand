@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 const SLIDES = [
-  { tone: 't3', eyebrow: 'Bath & beauty · New arrivals', title: 'Your everyday glow-up kit', lede: 'Hair tools, skincare and travel minis that make getting ready quicker.', ctas: [['Shop beauty', '/shop?cat=beauty', 'solid'], ['Build your vanity', '/#room', 'line']], imgs: ['7246', '7278', '7247'] },
-  { tone: 't4', eyebrow: 'Tech & gadgets', title: 'Light it. Frame it. Post it.', lede: 'Tripods, fill lights and speakers for content, calls and live videos.', ctas: [['Shop gadgets', '/shop?cat=gadgets', 'solid']], imgs: ['7270', '7235', '7242'] },
-  { tone: 't2', eyebrow: 'Kitchen helpers', title: 'Smarter in the kitchen', lede: 'Choppers, scales and flasks that save you time every day.', ctas: [['Shop kitchen', '/shop?cat=kitchen', 'solid']], imgs: ['7244', '7248', '7317'] },
+  { tone: 't3', eyebrow: 'Personalised gifts · Made to order', title: 'Gifts with their name on it', lede: 'Mugs, journals, bottles and keepsakes printed with a name, a photo or a message that means something.', ctas: [['Personalise a gift', '/shop?cat=custom', 'solid'], ['Shop all souvenirs', '/shop', 'line']], imgs: ['7246', '7278', '7247'] },
+  { tone: 't4', eyebrow: 'Weddings · Birthdays · Corporate', title: 'Souvenirs your guests actually keep', lede: 'Branded packs for weddings, parties, conferences and teams. Ordered in bulk, delivered nationwide.', ctas: [['Shop event souvenirs', '/shop?cat=corporate', 'solid']], imgs: ['7270', '7235', '7242'] },
+  { tone: 't2', eyebrow: 'Keepsakes', title: 'Little things, big memories', lede: 'Keychains, tees, totes and frames to remember the day by, or to send someone you miss.', ctas: [['Shop keepsakes', '/shop?cat=keepsakes', 'solid']], imgs: ['7244', '7248', '7317'] },
 ];
 
 export default function HeroSlider() {

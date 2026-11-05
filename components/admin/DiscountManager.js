@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { fmtDate } from '@/lib/format';
+import { CATEGORIES } from '@/lib/categories';
 
-const CATS = [['', 'Whole order'], ['beauty', 'Bath & beauty'], ['gadgets', 'Gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'], ['decor', 'Decor']];
+const CATS = [['', 'Whole order'], ...CATEGORIES.map(([s, l]) => [s, l])];
 
 export default function DiscountManager({ codes }) {
   const [rows, setRows] = useState(codes);

@@ -5,8 +5,9 @@ import ProductCard from './ProductCard';
 import { useCart } from './CartProvider';
 import { Close, Arrow } from './Icons';
 import { naira } from '@/lib/format';
+import { CATEGORIES } from '@/lib/categories';
 
-const CATS = [['beauty', 'Bath & beauty'], ['gadgets', 'Tech & gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'], ['decor', 'Decor']];
+const CATS = CATEGORIES.map(([s, l]) => [s, l]);
 const SORTS = { featured: (a, b) => a.position - b.position, best: (a, b) => (b.tags.includes('bestseller') - a.tags.includes('bestseller')) || a.position - b.position, new: (a, b) => (b.tags.includes('new') - a.tags.includes('new')) || a.position - b.position, lo: (a, b) => a.price - b.price, hi: (a, b) => b.price - a.price, az: (a, b) => a.name.localeCompare(b.name), za: (a, b) => b.name.localeCompare(a.name), rating: (a, b) => b.rating - a.rating };
 const PRESETS = [[0, 9999, 'Under ₦10k'], [10000, 20000, '₦10k–20k'], [20000, null, 'Over ₦20k']];
 

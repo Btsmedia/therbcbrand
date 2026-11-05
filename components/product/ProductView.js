@@ -8,6 +8,7 @@ import { Heart } from '../Icons';
 import { naira, pctOff } from '@/lib/format';
 import TrustList from './TrustList';
 import StickyBuy from './StickyBuy';
+import { catLabel } from '@/lib/categories';
 
 export default function ProductView({ p, bundle, whatsapp }) {
   const { add, wish, toggleWish } = useCart();
@@ -64,7 +65,7 @@ export default function ProductView({ p, bundle, whatsapp }) {
 
   return (
     <>
-      <div className="wrap"><nav className="crumbs" aria-label="Breadcrumb" style={{ paddingTop: 20 }}><Link href="/">Home</Link><span>/</span><Link href={`/shop?cat=${p.category}`}>{p.category === 'beauty' ? 'Bath & beauty' : p.category[0].toUpperCase() + p.category.slice(1)}</Link><span>/</span><b>{p.name}</b></nav></div>
+      <div className="wrap"><nav className="crumbs" aria-label="Breadcrumb" style={{ paddingTop: 20 }}><Link href="/">Home</Link><span>/</span><Link href={`/shop?cat=${p.category}`}>{catLabel(p.category)}</Link><span>/</span><b>{p.name}</b></nav></div>
       <div className="wrap pdp">
         <div className="gal">
           <div className="gal-thumbs">{p.images.length > 1 && p.images.map((u, i) => <button key={u} aria-pressed={i === img} onClick={() => setImg(i)} aria-label={`Photo ${i + 1}`}><img className="pimg" src={u} alt="" /></button>)}</div>
@@ -117,7 +118,7 @@ export default function ProductView({ p, bundle, whatsapp }) {
           <div>
             <details open><summary>Details</summary><p>{p.description}</p></details>
             <details><summary>Care</summary><p>{p.care || 'Wipe clean with a dry cloth.'}</p></details>
-            <details><summary>Delivery</summary><p>Delivery and pickup locally on Fridays. Nationwide delivery takes 1–3 days, with GIG or DHL for farther locations. The delivery fee depends on your location and the package weight, and we confirm it after you order. Any problem with your order? Message us on WhatsApp and we’ll sort it out.</p></details>
+            <details><summary>Delivery</summary><p>Local delivery or pickup available. Nationwide delivery takes 1–3 days, with GIG or DHL for farther locations. The delivery fee depends on your location and the package weight, and we confirm it after you order. Any problem with your order? Message us on WhatsApp and we’ll sort it out.</p></details>
           </div>
         </div>
       </div>
