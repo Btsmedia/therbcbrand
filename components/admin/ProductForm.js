@@ -4,9 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { naira } from '@/lib/format';
-import { CATEGORIES } from '@/lib/categories';
 
-const CATS = CATEGORIES.map(([s, l]) => [s, l]);
+const CATS = [['beauty', 'Bath & beauty'], ['gadgets', 'Tech & gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'], ['decor', 'Decor']];
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 async function toWebImage(file) {
@@ -26,7 +25,7 @@ export default function ProductForm({ initial }) {
   const [id] = useState(() => initial?.id || crypto.randomUUID());
   const [f, setF] = useState({
     name: initial?.name || '', description: initial?.description || '', care: initial?.care || '',
-    price: initial?.price ?? '', compare_at: initial?.compare_at ?? '', category: initial?.category || CATEGORIES[0][0],
+    price: initial?.price ?? '', compare_at: initial?.compare_at ?? '', category: initial?.category || 'beauty',
     extra: (initial?.categories || []).filter((c) => c !== initial?.category), tags: initial?.tags || [], badge: initial?.badge || '',
     custom_label: initial?.custom_label || '', custom_photo: !!initial?.custom_photo, custom_fee: initial?.custom_fee ?? '',
     status: initial?.status || 'draft',

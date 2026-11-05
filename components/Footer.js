@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { CATEGORIES } from '@/lib/categories';
 
 export default function Footer() {
   const path = usePathname();
@@ -14,7 +13,7 @@ export default function Footer() {
         <div className="foot">
           <div className="news">
             <h3>Letters from The RBC Brand</h3>
-            <p>New gift ideas, restocks and deals, about twice a month.</p>
+            <p>New arrivals, restocks and deals, about twice a month.</p>
             <form noValidate onSubmit={(e) => { e.preventDefault(); const v = e.currentTarget.email.value.trim(); setMsg(/^\S+@\S+\.\S+$/.test(v) ? "You're on the list." : 'Enter an email address like name@example.com.'); }}>
               <label htmlFor="newsEmail" style={{ position: 'absolute', left: -9999 }}>Email address</label>
               <input id="newsEmail" name="email" type="email" placeholder="Your email address" autoComplete="email" /><button type="submit">Subscribe</button>
@@ -22,7 +21,7 @@ export default function Footer() {
             <p className="ok" aria-live="polite">{msg}</p>
           </div>
           <div><h4>Shop</h4><ul>
-            {CATEGORIES.map(([s, l]) => <li key={s}><Link href={`/shop?cat=${s}`}>{l}</Link></li>)}<li><Link href="/shop?sale=1">Deals</Link></li><li><Link href="/shop">Marketplace</Link></li>
+            <li><Link href="/shop?cat=beauty">Bath &amp; beauty</Link></li><li><Link href="/shop?cat=gadgets">Tech &amp; gadgets</Link></li><li><Link href="/shop?cat=kitchen">Kitchen</Link></li><li><Link href="/shop?cat=lighting">Lighting</Link></li><li><Link href="/shop?cat=storage">Storage</Link></li><li><Link href="/shop?sale=1">Deals</Link></li><li><Link href="/shop">Marketplace</Link></li>
           </ul></div>
           <div id="help"><h4>Help</h4><ul><li><Link href="/account">Track an order</Link></li><li><Link href="/policies#delivery">Delivery</Link></li><li><Link href="/policies#returns">Help with an order</Link></li><li><Link href="/policies#privacy">Privacy</Link></li></ul></div>
           <div><h4>RBC</h4><ul><li><Link href="/account">My account</Link></li><li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li></ul></div>

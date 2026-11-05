@@ -5,7 +5,7 @@ import { getBrowserClient } from '@/lib/supabase/client';
 import { ANN_LIMITS, ANN_TONES, cleanAnnouncement, safeLink } from '@/lib/announcement';
 
 const QUICK = [
-  ['Deals', '/shop?sale=1'], ['New arrivals', '/shop?sort=new'], ['Marketplace', '/shop'], ['Personalised gifts', '/shop?cat=custom'], ['Corporate & events', '/shop?cat=corporate'],
+  ['Deals', '/shop?sale=1'], ['New arrivals', '/shop?sort=new'], ['Marketplace', '/shop'], ['Bath & beauty', '/shop?cat=beauty'], ['Gadgets', '/shop?cat=gadgets'],
 ];
 
 export default function AnnouncementManager({ initial }) {

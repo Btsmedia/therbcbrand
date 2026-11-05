@@ -19,7 +19,7 @@ export default function CartDrawer({ products }) {
       <aside className={`drawer ${open ? 'on' : ''}`} aria-label="Cart" aria-hidden={!open}>
         <div className="dr-head"><h2>Your cart</h2><button className="icon-btn" onClick={() => setOpen(false)} aria-label="Close cart"><Close /></button></div>
         <div className="ship">
-          <span><b>Delivery or pickup.</b> Nationwide in 1–3 days. Your delivery fee comes on WhatsApp after you order.</span>
+          <span><b>Delivery &amp; pickup every Friday.</b> Nationwide in 1–3 days. Your delivery fee comes on WhatsApp after you order.</span>
         </div>
         <div className="lines">
           {lines.length === 0 && (

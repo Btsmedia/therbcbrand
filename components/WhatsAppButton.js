@@ -1,7 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { CAT_LABEL } from '@/lib/categories';
 
 // Floating "chat with us" button. Opens WhatsApp with a message that already says which page the customer was on.
 export default function WhatsAppButton({ number }) {
@@ -25,7 +24,7 @@ export default function WhatsAppButton({ number }) {
   if (!digits || path.startsWith('/admin') || path.startsWith('/checkout') || path.startsWith('/pay')) return null;
 
   // enquiry-style openers, so the chat starts with what the customer wants to know
-  const CATS = Object.fromEntries(Object.entries(CAT_LABEL).map(([k, v]) => [k, v.toLowerCase()]));
+  const CATS = { beauty: 'bath & beauty', gadgets: 'gadgets', kitchen: 'kitchen', lighting: 'lighting', storage: 'storage', decor: 'decor' };
   const msg = path.startsWith('/product/') && title
     ? `Hi, I'm interested in the ${title}. Is it available, and how much would delivery be to my area?`
     : path.startsWith('/order/') || path.startsWith('/account')

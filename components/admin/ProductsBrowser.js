@@ -3,9 +3,8 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { naira } from '@/lib/format';
-import { CAT_LABEL } from '@/lib/categories';
 
-const CAT = CAT_LABEL;
+const CAT = { beauty: 'Bath & beauty', gadgets: 'Gadgets', kitchen: 'Kitchen', lighting: 'Lighting', storage: 'Storage', decor: 'Decor' };
 const TABS = [['all', 'All'], ['live', 'Live'], ['draft', 'Drafts'], ['archived', 'Archived']];
 
 export default function ProductsBrowser({ products }) {
