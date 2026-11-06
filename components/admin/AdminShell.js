@@ -14,6 +14,8 @@ const I = {
   deals: <><path d="M13 3 4 14h7l-1 7 9-11h-7z" /></>,
   discounts: <><path d="M20 12 12 20 4 12V4h8z" /><circle cx="8.5" cy="8.5" r="1.5" /></>,
   team: <><circle cx="9" cy="8" r="3.2" /><path d="M3 20c.8-3.5 3.2-5.5 6-5.5s5.2 2 6 5.5" /><circle cx="17" cy="9" r="2.5" /><path d="M16 14.6c2.6.2 4.4 2 5 5.4" /></>,
+  spot: <><circle cx="12" cy="12" r="4" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" /></>,
+  policy: <><path d="M6 3h9l4 4v14H6z" /><path d="M14 3v5h5M9 12h7M9 16h7" /></>,
   store: <><path d="M4 9h16l-1-5H5z" /><path d="M5 9v11h14V9" /><path d="M10 20v-6h4v6" /></>,
 };
 const Ico = ({ n }) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" aria-hidden="true">{I[n]}</svg>;
@@ -30,6 +32,8 @@ export default function AdminShell({ role, email, counts = {}, children }) {
     ['/admin/reviews', 'Reviews', 'reviews', p.reviews, counts.reviews],
     ['/admin/deals', 'Deals', 'deals', p.catalog],
     ['/admin/announcement', 'Announcement bar', 'announce', p.catalog],
+    ['/admin/spotlight', 'Spotlight', 'spot', p.catalog],
+    ['/admin/policies', 'Store policies', 'policy', p.catalog],
     ['/admin/lock', 'Lock store', 'lock', p.catalog],
     ['/admin/discounts', 'Discount codes', 'discounts', p.catalog],
     ['/admin/team', 'Team', 'team', p.team],

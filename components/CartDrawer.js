@@ -19,7 +19,7 @@ export default function CartDrawer({ products }) {
       <aside className={`drawer ${open ? 'on' : ''}`} aria-label="Cart" aria-hidden={!open}>
         <div className="dr-head"><h2>Your cart</h2><button className="icon-btn" onClick={() => setOpen(false)} aria-label="Close cart"><Close /></button></div>
         <div className="ship">
-          <span><b>Delivery &amp; pickup every Friday.</b> Nationwide in 1–3 days. Your delivery fee comes on WhatsApp after you order.</span>
+          <span><b>Delivery or pickup.</b> Nationwide in 1–3 days. Your delivery fee comes on WhatsApp after you order.</span>
         </div>
         <div className="lines">
           {lines.length === 0 && (
@@ -50,7 +50,7 @@ export default function CartDrawer({ products }) {
         {lines.length > 0 && (
           <div className="dr-foot">
             <div className="row"><span>Subtotal</span><strong>{naira(subtotal)}</strong></div>
-            <small>You pay for your items now. We’ll send your delivery fee on WhatsApp, or pick up free locally.</small>
+            <small>You pay for your items now. We’ll send your delivery fee on WhatsApp, or pick up free from our pickup point.</small>
             <button className="btn btn-solid" onClick={() => { setOpen(false); router.push('/checkout'); }}>Check out securely · {naira(subtotal)}</button>
             <small className="dr-assure">Pay by card, bank transfer or USSD</small>
           </div>

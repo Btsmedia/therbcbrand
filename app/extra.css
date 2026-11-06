@@ -645,3 +645,36 @@ a.icon-btn{display:grid}
 .pl-confirm .btn{height:36px;padding:0 14px;font-size:13px}
 .pl-yes{background:var(--err);border-color:var(--err);color:#fff}
 @media (max-width:620px){.pl-confirm{width:100%;justify-content:flex-end}.pl-confirm .btn{flex:none}}
+
+/* admin: homepage spotlight */
+.sp-preview{display:grid;grid-template-columns:1fr 120px;gap:16px;align-items:center;padding:18px;border-radius:12px;background:var(--deep);color:#fff}
+.sp-preview .eyebrow{color:rgba(255,255,255,.7);display:block;margin-bottom:6px}
+.sp-preview b{display:block;font-family:var(--serif,Georgia,serif);font-size:22px;line-height:1.1;margin-bottom:8px}
+.sp-preview p{font-size:13px;opacity:.8;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sp-preview .sp-price{font-weight:700;font-size:13px;margin-right:12px}
+.sp-preview .sp-cta{display:inline-block;font-size:12px;font-weight:600;background:#fff;color:var(--deep);border-radius:999px;padding:6px 12px}
+.sp-preview img{width:120px;height:120px;border-radius:50%;object-fit:cover;background:#fff}
+.sp-pick{border:0;padding:0;margin:0;display:grid;gap:8px;min-width:0}
+.sp-pick[disabled]{opacity:.5}
+.sp-list{display:grid;gap:6px;max-height:340px;overflow:auto;padding:2px}
+.sp-item{display:flex;align-items:center;gap:12px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;cursor:pointer;min-width:0}
+.sp-item.on{border-color:var(--azalea);box-shadow:0 0 0 1px var(--azalea);background:var(--soft)}
+.sp-item input{accent-color:var(--azalea);flex:none}
+.sp-item img,.sp-item .sp-noimg{width:44px;height:44px;border-radius:8px;object-fit:cover;flex:none;background:var(--soft)}
+.sp-item span{display:grid;min-width:0}
+.sp-item b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-item small{font-size:12.5px;color:var(--muted)}
+@media (max-width:560px){.sp-preview{grid-template-columns:1fr}.sp-preview img{width:96px;height:96px;order:-1}}
+
+/* admin: store policies editor */
+.pol-sec{margin-bottom:14px}
+.pol-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pol-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--soft);font-size:13px;font-weight:700;flex:none}
+.pol-title{flex:1;min-width:180px;font-weight:600}
+.pol-tools,.pol-ptools{display:flex;align-items:center;gap:6px}
+.icon-sm{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;display:grid;place-items:center;cursor:pointer}
+.icon-sm:disabled{opacity:.35;cursor:default}
+.pol-point{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:10px;border-radius:10px;background:var(--bg)}
+.pol-point textarea{grid-column:1 / -1}
+.pol-point textarea.input{height:auto;padding:10px 12px;resize:vertical}
+.pol-sec textarea.input{height:auto;padding:10px 12px;resize:vertical}

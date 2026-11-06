@@ -4,7 +4,7 @@ import Rail from '@/components/home/Rail';
 import VanitySet from '@/components/home/VanitySet';
 import { Arrow } from '@/components/Icons';
 import Stars from '@/components/Stars';
-import { getProducts, getDealSettings } from '@/lib/catalog';
+import { getProducts, getDealSettings, getSpotlight } from '@/lib/catalog';
 import { dealPicks } from '@/lib/deals';
 import { getLatestReviews } from '@/lib/reviews';
 import { naira } from '@/lib/format';
@@ -25,10 +25,11 @@ function Tile({ href, img, eyebrow, title, cta, big }) {
 }
 
 export default async function Home() {
-  const [products, reviews, ds] = await Promise.all([getProducts(), getLatestReviews(3), getDealSettings()]);
+  const [products, reviews, ds, ss] = await Promise.all([getProducts(), getLatestReviews(3), getDealSettings(), getSpotlight()]);
   const deals = products.filter((p) => p.compare_at && p.compare_at > p.price);
   const maxOff = deals.reduce((m, p) => Math.max(m, Math.round((1 - p.price / p.compare_at) * 100)), 0);
-  const spot = products.find((p) => p.slug === '5-in-1-facial-cleansing-massager') || products[0];
+  // chosen in admin; hidden if switched off or the product isn't live any more
+  const spot = ss.on ? products.find((p) => p.slug === ss.slug && p.images?.length) : null;
   const vanity = ['heated-straightening-brush', 'foldable-1000w-hair-dryer', 'refillable-perfume-atomizer', 'travel-jewellery-box'].map((s) => products.find((p) => p.slug === s)).filter(Boolean);
   const dealPics = dealPicks(deals, ds.picks);
 
@@ -37,7 +38,7 @@ export default async function Home() {
       <HeroSlider />
 
       <div className="trustbar" aria-label="Why shop with RBC"><div className="wrap trustbar-in">
-        <span><b>Delivery every Friday</b> locally</span>
+        <span><b>Nationwide delivery</b> in 1–3 days</span>
         <span><b>Nationwide</b> in 1–3 days</span>
         <span><b>Pay your way</b> with card, transfer or USSD</span>
         <span><b>Help on WhatsApp</b> before and after you buy</span>
@@ -80,11 +81,11 @@ export default async function Home() {
         <section className="story" aria-labelledby="story-h"><div className="wrap">
           <div className="story-top">
             <div>
-              <span className="eyebrow">Product spotlight</span>
+              <span className="eyebrow">{ss.eyebrow}</span>
               <h2 id="story-h">{spot.name}</h2>
-              <p>{spot.description}</p>
+              <p>{ss.blurb || spot.description}</p>
               <div className="spec"><span><b>{naira(spot.price)}</b></span>{spot.reviewCount > 0 && <span><b>{spot.rating.toFixed(1)}</b> from {spot.reviewCount} reviews</span>}</div>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><Link className="btn btn-solid" href={`/product/${spot.slug}`}>See details &amp; reviews</Link></div>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><Link className="btn btn-solid" href={`/product/${spot.slug}`}>{ss.cta}</Link></div>
             </div>
             <div className="story-art"><div className="ring" /><img src={spot.images[0]} alt={spot.name} loading="lazy" /></div>
           </div>
@@ -119,7 +120,7 @@ export default async function Home() {
       )}
 
       <section style={{ paddingTop: 0 }} aria-label="Why shop with us"><div className="wrap perks">
-        <div className="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 9h17v13H3zM20 13h5l4 5v4h-9z" /><circle cx="8" cy="24" r="2.5" /><circle cx="24" cy="24" r="2.5" /></svg><b>Delivery &amp; pickup on Fridays</b><p>Withlocally, or collect your order in person.</p></div>
+        <div className="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 9h17v13H3zM20 13h5l4 5v4h-9z" /><circle cx="8" cy="24" r="2.5" /><circle cx="24" cy="24" r="2.5" /></svg><b>Delivery or pickup</b><p>Nationwide delivery, or collect your order from our pickup point.</p></div>
         <div className="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="16" cy="16" r="12" /><path d="M4 16h24M16 4c4 4 5 8 5 12s-1 8-5 12c-4-4-5-8-5-12s1-8 5-12z" /></svg><b>Nationwide shipping</b><p>Interstate in 1 to 3 days. Farther locations with GIG or DHL.</p></div>
         <div className="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 25l1.6-5A10 10 0 1 1 11 23.5z" /></svg><b>Help on WhatsApp</b><p>Questions before or after you buy? Chat with us.</p></div>
         <div className="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="7" width="26" height="18" rx="2" /><path d="M3 12h26M8 20h6" /></svg><b>Pay your way</b><p>Card, bank transfer or USSD at checkout.</p></div>

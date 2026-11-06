@@ -117,7 +117,7 @@ export default function ProductView({ p, bundle, whatsapp }) {
           <div>
             <details open><summary>Details</summary><p>{p.description}</p></details>
             <details><summary>Care</summary><p>{p.care || 'Wipe clean with a dry cloth.'}</p></details>
-            <details><summary>Delivery</summary><p>Delivery and pickup locally on Fridays. Nationwide delivery takes 1–3 days, with GIG or DHL for farther locations. The delivery fee depends on your location and the package weight, and we confirm it after you order. Any problem with your order? Message us on WhatsApp and we’ll sort it out.</p></details>
+            <details><summary>Delivery</summary><p>Nationwide delivery takes 1–3 days, or pick up from our pickup point. We ship with GIG or DHL for farther locations. The delivery fee depends on your location and the package weight, and we confirm it after you order. Any problem with your order? Message us on WhatsApp and we’ll sort it out.</p></details>
           </div>
         </div>
       </div>
