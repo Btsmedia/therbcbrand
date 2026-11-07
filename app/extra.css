@@ -744,3 +744,6 @@ a.icon-btn{display:grid}
 .apc-sw i.out{opacity:.35;position:relative}
 .apc-sw i.out::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1.5px;background:var(--muted);transform:rotate(45deg)}
 .apc-sw small{font-size:14px;color:var(--ink);margin-left:4px}
+
+.apc-line{display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap}
+.apc-info{gap:8px}

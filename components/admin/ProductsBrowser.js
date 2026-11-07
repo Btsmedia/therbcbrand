@@ -77,13 +77,13 @@ export default function ProductsBrowser({ products }) {
                   </Link>
                   <div className="apc-info">
                     <Link href={`/admin/products/${p.id}`} className="apc-name">{p.name}</Link>
-                    <span className="apc-meta">
-                      {CAT[p.category] || p.category}
-                    </span>
-                    <span className="apc-tags">
+                    <div className="apc-line">
+                      <span className="apc-meta">{CAT[p.category] || p.category}</span>
+                      <span className="apc-tags">
                       <span className={`pill-s ${p.status === 'live' ? 'good' : p.status === 'draft' ? 'warn' : ''}`}>{p.status}</span>
                       {p.personalised && <span className="pl-pers">Personalised</span>}
                     </span>
+                    </div>
                     <div className="apc-priceline">
                       <span className="apc-price">{p.price ? naira(p.price) : <b className="pill-s warn">Set price</b>}{p.compare_at ? <s>{naira(p.compare_at)}</s> : null}</span>
                       <span className={`apc-qty ${p.stock === 0 ? 'out' : p.stock <= 4 ? 'low' : ''}`}>{p.stock === 0 ? 'Sold out' : `×${p.stock}`}</span>
