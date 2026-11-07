@@ -8,7 +8,7 @@ import { naira } from '@/lib/format';
 
 const CATS = [['beauty', 'Bath & beauty'], ['gadgets', 'Tech & gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'], ['decor', 'Decor']];
 const SORTS = { featured: (a, b) => a.position - b.position, best: (a, b) => (b.tags.includes('bestseller') - a.tags.includes('bestseller')) || a.position - b.position, new: (a, b) => (b.tags.includes('new') - a.tags.includes('new')) || a.position - b.position, lo: (a, b) => a.price - b.price, hi: (a, b) => b.price - a.price, az: (a, b) => a.name.localeCompare(b.name), za: (a, b) => b.name.localeCompare(a.name), rating: (a, b) => b.rating - a.rating };
-const PRESETS = [[0, 9999, 'Under ₦10k'], [10000, 20000, '₦10k–20k'], [20000, null, 'Over ₦20k']];
+const PRESETS = [[0, 9999, 'Under ₦10k'], [10000, 20000, '₦10k to ₦20k'], [20000, null, 'Over ₦20k']];
 
 export default function ShopClient({ products, initial, deal }) {
   const { wish } = useCart();
@@ -57,7 +57,7 @@ export default function ShopClient({ products, initial, deal }) {
     ...[...avail].map((a) => [a === 'in' ? 'In stock' : 'Out of stock', () => toggle(avail, setAvail, a)]),
     ...(sale ? [['On sale', () => setSale(false)]] : []),
     ...(saved ? [['Saved pieces', () => setSaved(false)]] : []),
-    ...(min !== '' || max !== '' ? [[`${naira(min || 0)} – ${max !== '' ? naira(max) : 'any'}`, () => { setMin(''); setMax(''); }]] : []),
+    ...(min !== '' || max !== '' ? [[`${naira(min || 0)} to ${max !== '' ? naira(max) : 'any'}`, () => { setMin(''); setMax(''); }]] : []),
     ...(q ? [[`“${q}”`, () => setQ('')]] : []),
   ];
   const onlyCat = cat.size === 1 ? [...cat][0] : cat.size === 0 ? 'all' : null;
@@ -111,7 +111,7 @@ export default function ShopClient({ products, initial, deal }) {
           <span id="mkCount">{list.length} {list.length === 1 ? 'product' : 'products'}</span>
           <label className="sort" htmlFor="mkSort"><span>Sort by</span>
             <select id="mkSort" value={sort} onChange={(e) => setSort(e.target.value)}>
-              <option value="featured">Featured</option><option value="best">Best selling</option><option value="new">Newest</option><option value="rating">Top rated</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option><option value="az">Alphabetical, A–Z</option><option value="za">Alphabetical, Z–A</option>
+              <option value="featured">Featured</option><option value="best">Best selling</option><option value="new">Newest</option><option value="rating">Top rated</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option><option value="az">Alphabetical, A to Z</option><option value="za">Alphabetical, Z to A</option>
             </select></label>
           <div className="dens" role="group" aria-label="Grid density">{[2, 3, 4].map((n) => <button key={n} aria-pressed={cols === n} aria-label={`${n} per row`} onClick={() => setCols(n)}><svg viewBox="0 0 20 20" fill="currentColor">{Array.from({ length: n * 2 }, (_, i) => { const w = (18 - (n - 1) * 1.5) / n; return <rect key={i} x={1 + (i % n) * (w + 1.5)} y={i < n ? 2 : 11} width={w} height="7" rx="1" />; })}</svg></button>)}</div>
         </div>

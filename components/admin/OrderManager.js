@@ -48,15 +48,15 @@ export default function OrderManager({ initial, events, canEdit }) {
   const first = o.first_name;
   const where = [o.city, o.state].filter(Boolean).join(', ');
   const templates = {
-    fee: `Hi ${first}, thank you for your RBC order ${o.number}! The delivery fee to ${where || 'your address'} is ${feeNum != null ? naira(feeNum) : '₦___'}. Please reply to confirm, and I'll share how to pay. — The RBC Brand`,
+    fee: `Hi ${first}, thank you for your RBC order ${o.number}! The delivery fee to ${where || 'your address'} is ${feeNum != null ? naira(feeNum) : '₦___'}. Please reply to confirm, and I'll share how to pay.\n\nThe RBC Brand`,
     status: {
-      awaiting_transfer: `Hi ${first}, thanks for your RBC order ${o.number} (${naira(itemsTotal)}). We're waiting for your bank transfer. Please send proof of payment here once done. — The RBC Brand`,
-      paid: `Hi ${first}, your RBC order ${o.number} is confirmed and we're getting it ready. — The RBC Brand`,
-      pay_on_delivery: `Hi ${first}, your RBC order ${o.number} is confirmed. You'll pay ${naira(itemsTotal + (feeNum || 0))} ${pickup ? 'at pickup' : 'on delivery'}. — The RBC Brand`,
-      packed: `Hi ${first}, your RBC order ${o.number} is packed${pickup ? ' and will be ready for pickup soon' : ' and goes out on the next delivery day'}. — The RBC Brand`,
-      shipped: pickup ? `Hi ${first}, your RBC order ${o.number} is ready for pickup. — The RBC Brand` : `Hi ${first}, your RBC order ${o.number} is on its way${o.courier ? ` with ${o.courier}` : ''}${o.tracking_number ? `. Tracking number: ${o.tracking_number}` : ''}. — The RBC Brand`,
-      delivered: `Hi ${first}, thank you for shopping with RBC! We hope you love your order ${o.number}. You can leave a review from your account on our website. — The RBC Brand`,
-    }[o.status] || `Hi ${first}, this is The RBC Brand about your order ${o.number}.`,
+      awaiting_transfer: `Hi ${first}, thanks for your RBC order ${o.number} (${naira(itemsTotal)}). We're waiting for your bank transfer. Please send proof of payment here once done.\n\nThe RBC Brand`,
+      paid: `Hi ${first}, your RBC order ${o.number} is confirmed and we're getting it ready.\n\nThe RBC Brand`,
+      pay_on_delivery: `Hi ${first}, your RBC order ${o.number} is confirmed. You'll pay ${naira(itemsTotal + (feeNum || 0))} ${pickup ? 'at pickup' : 'on delivery'}.\n\nThe RBC Brand`,
+      packed: `Hi ${first}, your RBC order ${o.number} is packed${pickup ? ' and will be ready for pickup soon' : ' and goes out on the next delivery day'}.\n\nThe RBC Brand`,
+      shipped: pickup ? `Hi ${first}, your RBC order ${o.number} is ready for pickup.\n\nThe RBC Brand` : `Hi ${first}, your RBC order ${o.number} is on its way${o.courier ? ` with ${o.courier}` : ''}${o.tracking_number ? `. Tracking number: ${o.tracking_number}` : ''}.\n\nThe RBC Brand`,
+      delivered: `Hi ${first}, thank you for shopping with RBC! We hope you love your order ${o.number}. You can leave a review from your account on our website.\n\nThe RBC Brand`,
+    }[o.status] || `Hi ${first}, this is the RBC team about your order ${o.number}.`,
   };
   const waText = tpl === 'fee' ? templates.fee : templates.status;
 

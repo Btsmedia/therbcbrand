@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { POL_LIMITS, cleanPolicies, policiesSize, slugify } from '@/lib/policies';
 
-const FIXED = { delivery: 'Linked from checkout and the footer', returns: 'Linked from the footer (“Help with an order”)', privacy: 'Linked from the footer' };
+const FIXED = { delivery: 'Linked from checkout and the footer', returns: 'Linked from “Help with an order” in the footer', privacy: 'Linked from the footer' };
 
 export default function PoliciesManager({ initial }) {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function PoliciesManager({ initial }) {
   async function save(e) {
     e.preventDefault(); setMsg(null); setConfirmDel(null);
     const empty = secs.findIndex((s) => !s.title.trim() || (!s.text.trim() && !s.points.some((p) => p.label.trim() || p.text.trim())));
-    if (empty >= 0) return setMsg(['err', `Section ${empty + 1} needs a title and some wording (a paragraph or at least one point). Fill it in or delete it.`]);
+    if (empty >= 0) return setMsg(['err', `Section ${empty + 1} needs a title and some wording, either a paragraph or at least one point. Fill it in or delete it.`]);
     if (size > POL_LIMITS.total) return setMsg(['err', 'The policies are too long to save. Shorten some sections.']);
     // new sections get a link name from their title
     const value = cleanPolicies({ sections: secs.map((s) => ({ ...s, id: s.id || slugify(s.title) })) });
@@ -40,7 +40,7 @@ export default function PoliciesManager({ initial }) {
     <>
       <div className="ad-head"><h1>Store policies</h1><a className="btn btn-line" href="/policies" target="_blank" rel="noreferrer">View page</a></div>
       {msg && <p className={`notice ${msg[0] === 'err' ? 'err' : 'ok'}`} role="status">{msg[1]}</p>}
-      <p className="hint" style={{ margin: '0 0 14px' }}>Each section has a title, an optional paragraph and optional points. A point’s bold start (like “Pickup.”) is optional.</p>
+      <p className="hint" style={{ margin: '0 0 14px' }}>Each section has a title, an optional paragraph and optional points. Each point can start with a few bold words, like “Pickup.”, but it doesn’t have to.</p>
 
       <form onSubmit={save}>
         {secs.map((s, i) => (

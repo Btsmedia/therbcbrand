@@ -19,7 +19,7 @@ export default function ReviewQueue({ reviews, status }) {
     <>
       <h1>Reviews</h1>
       <div className="tabs">{[['pending', 'Waiting'], ['approved', 'Published'], ['rejected', 'Rejected']].map(([k, l]) => <Link key={k} className="tab" aria-selected={status === k} href={`/admin/reviews?status=${k}`}>{l}</Link>)}</div>
-      <p className="hint">Only customers who paid for the product can submit a review. Check photos and videos before approving: nothing shows in the store until you do.</p>
+      <p className="hint">Only customers who paid for the product can submit a review. Check photos and videos before approving. Nothing shows in the store until you do.</p>
       {err && <p className="notice err">{err}</p>}
       {!rows.length && <p className="muted">{status === 'pending' ? 'No reviews waiting. Nice.' : 'Nothing here yet.'}</p>}
       <div className="rq">{rows.map((r) => (

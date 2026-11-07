@@ -26,7 +26,7 @@ export default function SpotlightManager({ initial, products }) {
     const { error } = await getBrowserClient().from('site_settings').upsert({ key: 'spotlight', value });
     setBusy(false);
     if (error) return setMsg(['err', error.message]);
-    setMsg(['ok', s.on ? `Saved. ${chosen.name} is now the spotlight on the homepage (within a minute).` : 'Saved. The spotlight section is now hidden.']);
+    setMsg(['ok', s.on ? `Saved. ${chosen.name} is now the homepage spotlight. The store updates within a minute.` : 'Saved. The spotlight section is now hidden.']);
     router.refresh();
   }
 

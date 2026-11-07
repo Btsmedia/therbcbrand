@@ -28,7 +28,7 @@ export default function TransferBox({ amount, amountLabel, reference, bank, what
         <li><span>Send a screenshot of your receipt to the RBC team on WhatsApp.</span></li>
       </ol>
       <a className="btn btn-solid tb-btn" href={whatsapp} target="_blank" rel="noopener noreferrer">Send my receipt on WhatsApp</a>
-      <p className="tb-note">We&apos;ll confirm your payment and email you. Orders not paid within 24 hours are cancelled automatically.</p>
+      <p className="tb-note">We&apos;ll confirm your payment and email you. If we don’t receive payment within 24 hours, the order cancels itself.</p>
     </div>
   );
 }

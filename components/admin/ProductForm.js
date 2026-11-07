@@ -131,7 +131,7 @@ export default function ProductForm({ initial }) {
 
       <div className="card-box">
         <h2 style={{ fontSize: 17, fontWeight: 600 }}>Photos</h2>
-        <p className="hint">Up to 8. The first photo is the cover on cards and in search. Photos are resized for the web as they upload.</p>
+        <p className="hint">Up to 8. The first photo is the cover on cards and in search. We resize photos for the web as they upload.</p>
         <div className="img-grid">
           {images.map((img, i) => (
             <div className="img-cell" key={img.url}>
@@ -151,7 +151,7 @@ export default function ProductForm({ initial }) {
           <label className="lbl full">Name<input className="input" value={f.name} onChange={set('name')} placeholder="e.g. Foldable 1000W Hair Dryer" /></label>
           <label className="lbl">Price (₦)<input className="input" type="number" min="0" inputMode="numeric" value={f.price} onChange={set('price')} /></label>
           <div className="lbl"><span className="sale-row">Put on sale<label className="switch"><input type="checkbox" checked={onSale} onChange={toggleSale} /><span className="track" aria-hidden="true" /></label></span>
-            {onSale ? <input className="input" type="number" min="0" inputMode="numeric" value={f.compare_at} onChange={set('compare_at')} placeholder="Was price (₦)" aria-label="Was price" /> : <small>Off — sold at the normal price.</small>}
+            {onSale ? <input className="input" type="number" min="0" inputMode="numeric" value={f.compare_at} onChange={set('compare_at')} placeholder="Was price (₦)" aria-label="Was price" /> : <small>Off. It sells at the normal price.</small>}
           </div>
           {onSale && f.compare_at !== '' && Number(f.compare_at) > Number(f.price) && <p className="hint full">Shows as {naira(f.price)} <s>{naira(f.compare_at)}</s>, {Math.round((1 - f.price / f.compare_at) * 100)}% off, and appears in Deals.</p>}
           <label className="lbl">Main category<select className="select" value={f.category} onChange={set('category')}>{CATS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select></label>

@@ -35,7 +35,7 @@ export default function TeamManager({ members, me }) {
       <div className="ad-head"><h1>Team</h1></div>
       <section className="card-box">
         <h2 className="ad-h2">Add someone</h2>
-        <p className="hint">They sign in with their own email (no password). Ask them to sign in once on the store first, then add them here.</p>
+        <p className="hint">They sign in with their own email, no password needed. Ask them to sign in once on the store first, then add them here.</p>
         <form className="om-inline wrap2" onSubmit={(e) => { e.preventDefault(); if (!/^\S+@\S+\.\S+$/.test(email.trim())) return setMsg(['err', 'Enter their email address.']); setMember(email.trim(), role); setEmail(''); }}>
           <label className="lbl">Email<input className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" /></label>
           <label className="lbl">Role<select className="select" value={role} onChange={(e) => setRole(e.target.value)}>{Object.entries(ROLES).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select></label>

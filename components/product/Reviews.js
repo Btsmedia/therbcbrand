@@ -42,7 +42,7 @@ export default function Reviews({ product, reviews, access }) {
           {n === 0 ? (
           <div className="rv-sum">
             <p style={{ fontSize: 15, color: 'var(--ink)' }}><b>Be the first to review this.</b></p>
-            <p>Bought it? A quick note (with a photo) helps other shoppers decide.</p>
+            <p>Bought it? A short note helps other shoppers decide, and a photo helps even more.</p>
             <WriteButton access={access} productSlug={product.slug} onOpen={() => setOpen(true)} />
           </div>
           ) : (
@@ -153,7 +153,7 @@ function ReviewForm({ product, userId, defaultName, onDone }) {
   async function submit(e) {
     e.preventDefault();
     if (!rating) return setErr('Choose a star rating.');
-    if (body.trim().length < 10) return setErr('Write at least a sentence (10 characters or more).');
+    if (body.trim().length < 10) return setErr('Write at least a sentence, 10 characters or more.');
     if (!name.trim()) return setErr('Add the name to show on your review.');
     setBusy(true); setErr('');
     const sb = getBrowserClient();

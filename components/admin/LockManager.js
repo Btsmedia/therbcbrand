@@ -107,7 +107,7 @@ export default function LockManager({ initial, signups }) {
 
       <section className="card-box">
         <h2 className="ad-h2">Notify list <span className="hint">{list.length}</span></h2>
-        <p className="hint">People who left their email on the lock page. Email them when you open (for example from your email app, pasting the copied list into BCC).</p>
+        <p className="hint">People who left their email on the lock page. Email them when you open. The easiest way is to paste the copied list into BCC in your email app.</p>
         {list.length === 0 ? <p className="hint">No signups yet.</p> : <>
           <div className="lm-tools">
             <div className="tabs">{[['all', `All (${list.length})`], ...Object.entries(LOCK_TEMPLATES).filter(([k]) => counts[k]).map(([k, v]) => [k, `${v.label} (${counts[k]})`])].map(([k, lbl]) => <button key={k} className="tab" aria-selected={filter === k} onClick={() => setFilter(k)}>{lbl}</button>)}</div>

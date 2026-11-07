@@ -38,7 +38,7 @@ export default async function Home() {
       <HeroSlider />
 
       <div className="trustbar" aria-label="Why shop with RBC"><div className="wrap trustbar-in">
-        <span><b>Nationwide delivery</b> in 1–3 days</span>
+        <span><b>Nationwide delivery</b> in 1 to 3 days</span>
         <span><b>Personalised</b> with a name or photo</span>
         <span><b>Pay your way</b> with card, transfer or USSD</span>
         <span><b>Help on WhatsApp</b> before and after you buy</span>

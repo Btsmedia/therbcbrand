@@ -16,7 +16,7 @@ export default function DiscountManager({ codes }) {
     e.preventDefault(); setMsg(null);
     const code = f.code.trim().toUpperCase();
     const percent = parseInt(f.percent, 10);
-    if (!/^[A-Z0-9]{3,20}$/.test(code)) return setMsg(['err', 'Use 3–20 letters or numbers, no spaces.']);
+    if (!/^[A-Z0-9]{3,20}$/.test(code)) return setMsg(['err', 'Use 3 to 20 letters or numbers, no spaces.']);
     if (!(percent >= 1 && percent <= 90)) return setMsg(['err', 'Discount must be between 1% and 90%.']);
     const cat = CATS.find(([k]) => k === f.category)?.[1];
     const row = { code, percent, category: f.category || null, label: f.category ? `${percent}% off ${cat.toLowerCase()}` : `${percent}% off your order`, active: true, expires_at: f.expires ? new Date(`${f.expires}T23:59:59+01:00`).toISOString() : null };

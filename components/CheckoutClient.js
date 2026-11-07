@@ -6,7 +6,7 @@ import { Lock, Bag } from './Icons';
 import { naira } from '@/lib/format';
 import { totals, NG_STATES } from '@/lib/pricing';
 
-const SHORT = { nationwide: 'Interstate in 1–3 days. GIG or DHL for farther places.', ife: 'Local delivery', pickup: 'Collect at our pickup point' };
+const SHORT = { nationwide: 'Interstate in 1 to 3 days. GIG or DHL for farther places.', ife: 'Local delivery', pickup: 'Collect at our pickup point' };
 
 const Field = ({ id, label, err, children }) => (
   <div className={`field ${err ? 'err' : ''}`}><label htmlFor={id}>{label}</label>{children}<span className="msg">{err}</span></div>

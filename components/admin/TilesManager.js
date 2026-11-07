@@ -83,7 +83,7 @@ export default function TilesManager({ initial }) {
       <form className="dl-form" onSubmit={save} style={{ display: 'grid', gap: 20 }}>
         <section className="card-box">
           <h2 className="ad-h2">Photo tiles under “Shop by category”</h2>
-          <p className="muted">One large tile on the left and two smaller ones on the right (stacked on phones).</p>
+          <p className="muted">One large tile on the left and two smaller ones on the right. On phones they stack.</p>
           {t.collage.map((tile, i) => <TileEditor key={i} label={i === 0 ? 'Large tile' : `Small tile ${i}`} tile={tile} onChange={setTile('collage', i)} onPhoto={(f) => photo('collage', i, f)} uploading={up === `collage-${i}`} />)}
         </section>
         <section className="card-box">

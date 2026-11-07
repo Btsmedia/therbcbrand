@@ -2,7 +2,7 @@
 const ITEMS = [
   ['Secure payment', 'Card, bank transfer or USSD'],
   ['Pay for your items now', 'We send your delivery fee on WhatsApp'],
-  ['Nationwide delivery', 'Delivered in 1–3 days, or local pickup'],
+  ['Nationwide delivery', 'Delivered in 1 to 3 days, or local pickup'],
   ['Real help, fast', 'Chat with us on WhatsApp'],
 ];
 
