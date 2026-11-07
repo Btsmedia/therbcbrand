@@ -31,6 +31,7 @@ export default function ProductCard({ p, tone = 1 }) {
           {pics.map((src, i) => <img key={src + i} className={`pimg ${i === pic ? 'on' : ''}`} src={src} alt={i === 0 ? p.name : ''} loading="lazy" />)}
         </Link>
         {tags.length > 0 && <div className="pc-tags">{tags.map((t) => <span key={t} className={t.startsWith('−') ? 'sale' : t === 'Sold out' ? 'out' : ''}>{t}</span>)}</div>}
+        <button className="pc-wish" aria-pressed={saved} onClick={() => toggleWish(p.id)} aria-label={saved ? `Remove ${p.name} from wishlist` : `Save ${p.name}`}><Heart /></button>
         {pics.length > 1 && <div className="pc-dots">{pics.map((_, i) => <button key={i} className={i === pic ? 'on' : ''} aria-label={`Photo ${i + 1}`} onClick={() => setPic(i)} />)}</div>}
       </div>
       <h3><Link href={href}>{p.name}</Link></h3>
@@ -41,13 +42,8 @@ export default function ProductCard({ p, tone = 1 }) {
           <span className="sw-name">{v.colour}</span>
         </div>
       )}
-      <div className="pc-row">
-        <p className="price">{p.compare_at && <s>{naira(p.compare_at)}</s>}<span>{naira(p.price)}</span>{!soldOut && stock <= 4 && <small className="stock">Only {stock} left</small>}</p>
-        <div className="pc-acts">
-          <button className="pc-btn" aria-pressed={saved} onClick={() => toggleWish(p.id)} aria-label={saved ? `Remove ${p.name} from wishlist` : `Save ${p.name}`}><Heart /></button>
-          <button className="pc-btn" disabled={soldOut} onClick={() => add(p, v)} aria-label={soldOut ? `${p.name} is sold out` : `Add ${p.name} to bag`}><Bag /></button>
-        </div>
-      </div>
+      <p className="price">{p.compare_at && <s>{naira(p.compare_at)}</s>}<span>{naira(p.price)}</span>{!soldOut && stock <= 4 && <small className="stock">Only {stock} left</small>}</p>
+      <button className="pc-add" disabled={soldOut} onClick={() => add(p, v)} aria-label={soldOut ? `${p.name} is sold out` : `Add ${p.name} to bag`}><Bag />{soldOut ? 'Sold out' : 'Add to bag'}</button>
     </article>
   );
 }

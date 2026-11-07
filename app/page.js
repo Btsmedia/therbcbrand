@@ -58,7 +58,7 @@ export default async function Home() {
       </div></section>
 
       <Rail id="edit" eyebrow="New in" title="The RBC Edit" products={products} tabs={[['new', 'New in'], ['beauty', 'Bath & beauty'], ['gadgets', 'Gadgets'], ['kitchen', 'Kitchen']]} />
-      <div className="wrap" style={{ marginTop: -60, marginBottom: 72 }}><Link className="link-arrow" href="/shop">Browse every piece <Arrow /></Link></div>
+      <div className="wrap" style={{ marginTop: -16, marginBottom: 56 }}><Link className="link-arrow" href="/shop">Browse every piece <Arrow /></Link></div>
 
       {deals.length > 0 && (
         <section id="sale" style={{ paddingTop: 0 }} aria-labelledby="sale-h"><div className="wrap"><div className="split">
