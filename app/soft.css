@@ -320,3 +320,19 @@ footer.site{border:1px solid var(--line)}
 @media (max-width:520px){.oc-item{grid-template-columns:64px minmax(0,1fr)}.oc-item .th{width:64px;height:64px}.oc-rev,.oc-item .pill-s{grid-column:2;justify-self:start;margin:-6px 0 10px}}
 .pc .media > a > img{animation:none}
 .oc-item .th{align-self:stretch;height:auto;min-height:80px}@media (max-width:520px){.oc-item .th{min-height:64px}}
+
+/* ===== Type: clean sans headings (the R monogram keeps its serif) ===== */
+:root{--f-display:"Manrope","Hanken Grotesk","Helvetica Neue",Arial,sans-serif;--f-mono:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif}
+h1,h2,h3,.display,.page-title{font-weight:500;letter-spacing:-.025em}
+.slide h1,.slide h2,.slide.photo h1,.slide.photo h2{font-size:clamp(40px,5.4vw,76px);line-height:1.02;letter-spacing:-.035em}
+.mk-title h1,.page-title{letter-spacing:-.035em}
+.mk-title h1{font-size:clamp(40px,6vw,76px)}
+.sec-head h2{font-size:clamp(26px,3vw,38px)}
+.logo{font-weight:600;letter-spacing:-.03em;font-size:22px}
+.util .mid{letter-spacing:.01em;font-size:12.5px}
+.foot h4,.mega h4,.eyebrow{letter-spacing:.08em}
+.wordmark{font-weight:600}
+.marquee span{font-weight:400;letter-spacing:-.02em}
+.pc h3{letter-spacing:0}
+.card h3,.oc-item b,.acc-hi h1{letter-spacing:-.01em}
+.lk-title,.lock h1{font-weight:500}
