@@ -67,38 +67,53 @@ export default function ProductsBrowser({ products }) {
       {shown.length === 0 ? (
         <p className="muted" style={{ padding: '24px 0' }}>{q ? `No products match “${q}”.` : 'No products here yet.'}</p>
       ) : (
-        <div className="pl-list">
-          {shown.map((p) => (
-            <div className={`pl-row ${busy === p.id ? 'is-loading' : ''}`} key={p.id}>
-              <Link href={`/admin/products/${p.id}`} className="pl-thumb" aria-label={`Edit ${p.name}`}>
-                {p.image ? <img src={p.image} alt="" /> : <span className="pl-noimg">—</span>}
-              </Link>
-              <Link href={`/admin/products/${p.id}`} className="pl-info">
-                <span className="pl-name">{p.name}</span>
-                <span className="pl-meta">
-                  <span className="pl-price">{p.price ? naira(p.price) : <b className="pill-s warn">Set price</b>}{p.compare_at ? <s>{naira(p.compare_at)}</s> : null}</span>
-                  <span className="pl-dot">·</span>
-                  <span className={`pl-stock ${p.stock === 0 ? 'out' : p.stock <= 4 ? 'low' : ''}`}>{p.stock === 0 ? 'Sold out' : `${p.stock} in stock`}</span>
-                  <span className={`pill-s ${p.status === 'live' ? 'good' : p.status === 'draft' ? 'warn' : ''}`}>{p.status}</span>
-                  {p.personalised && <span className="pl-pers">Personalised</span>}
-                </span>
-              </Link>
-              {confirmId === p.id ? (
-                <div className="pl-acts pl-confirm">
-                  <span className="hint">Delete?</span>
-                  <button className="btn btn-solid pl-yes" disabled={busy === p.id} onClick={() => del(p)}>{busy === p.id ? 'Deleting…' : 'Yes, delete'}</button>
-                  <button className="btn btn-line" onClick={() => setConfirmId('')}>Keep</button>
+        <div className="apc-grid">
+          {shown.map((p) => {
+            return (
+              <article className={`apc-card ${busy === p.id ? 'is-loading' : ''}`} key={p.id}>
+                <div className="apc-top">
+                  <Link href={`/admin/products/${p.id}`} className="apc-thumb" aria-label={`Edit ${p.name}`}>
+                    {p.image ? <img src={p.image} alt="" /> : <span className="pl-noimg">No photo</span>}
+                  </Link>
+                  <div className="apc-info">
+                    <Link href={`/admin/products/${p.id}`} className="apc-name">{p.name}</Link>
+                    <span className="apc-meta">
+                      {CAT[p.category] || p.category}
+                    </span>
+                    <span className="apc-tags">
+                      <span className={`pill-s ${p.status === 'live' ? 'good' : p.status === 'draft' ? 'warn' : ''}`}>{p.status}</span>
+                      {p.personalised && <span className="pl-pers">Personalised</span>}
+                    </span>
+                    <div className="apc-priceline">
+                      <span className="apc-price">{p.price ? naira(p.price) : <b className="pill-s warn">Set price</b>}{p.compare_at ? <s>{naira(p.compare_at)}</s> : null}</span>
+                      <span className={`apc-qty ${p.stock === 0 ? 'out' : p.stock <= 4 ? 'low' : ''}`}>{p.stock === 0 ? 'Sold out' : `×${p.stock}`}</span>
+                    </div>
+                  </div>
                 </div>
-              ) : (
-                <div className="pl-acts">
-                  <Link className="btn btn-line" href={`/admin/products/${p.id}`}>Edit</Link>
-                  <button className="icon-btn pl-del" disabled={busy === p.id} onClick={() => setConfirmId(p.id)} aria-label={`Delete ${p.name}`} title="Delete">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" /></svg>
-                  </button>
+                <div className="apc-foot">
+                  <div className="apc-cols">
+                    <span>{p.colours.length === 1 ? '1 colour' : `${p.colours.length} colours`}</span>
+                    <div className="apc-sw">{p.colours.map((c) => <i key={c.colour} title={`${c.colour}${c.stock ? ` · ${c.stock} in stock` : ' · sold out'}`} className={c.stock ? '' : 'out'} style={{ background: c.hex }} />)}{p.colours.length === 1 && <small>{p.colours[0].colour}</small>}</div>
+                  </div>
+                  {confirmId === p.id ? (
+                    <div className="apc-acts">
+                      <button className="apc-pill apc-danger" disabled={busy === p.id} onClick={() => del(p)}>{busy === p.id ? 'Deleting…' : 'Yes, delete'}</button>
+                      <button className="apc-round" onClick={() => setConfirmId('')} aria-label="Keep product" title="Keep">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="apc-acts">
+                      <Link className={`apc-pill ${p.status === 'live' ? 'solid' : ''}`} href={`/admin/products/${p.id}`}>Edit product</Link>
+                      <button className={`apc-round ${p.status === 'live' ? 'solid' : ''}`} disabled={busy === p.id} onClick={() => setConfirmId(p.id)} aria-label={`Delete ${p.name}`} title="Delete">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" /></svg>
+                      </button>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              </article>
+            );
+          })}
         </div>
       )}
     </>
