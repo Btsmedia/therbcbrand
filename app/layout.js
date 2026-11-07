@@ -1,5 +1,6 @@
 import './globals.css';
 import './extra.css';
+import './soft.css';
 import { Suspense } from 'react';
 import CartProvider from '@/components/CartProvider';
 import Header from '@/components/Header';
@@ -19,7 +20,7 @@ export const metadata = {
   title: { default: 'The RBC Brand', template: '%s · The RBC Brand' },
   description: 'Home finds, bath & beauty, kitchen helpers and gadgets, delivered across Nigeria.',
 };
-export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#2A1745' };
+export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#FAF7F0' };
 
 export default async function RootLayout({ children }) {
   const [products, ds, ann, lockSettings, h] = await Promise.all([getProducts(), getDealSettings(), getAnnouncement(), getLock(), headers()]);

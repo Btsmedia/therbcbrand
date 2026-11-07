@@ -67,7 +67,7 @@ export default function Header({ deal, announcement }) {
           </div>
           <Link className="logo" href="/" aria-label="RBC home"><Flower />RBC</Link>
           <div className="icons">
-            <button className="icon-btn" onClick={() => setSearch(true)} aria-label="Search"><Search /></button>
+            <button className="icon-btn s-trigger" onClick={() => setSearch(true)} aria-label="Search"><Search /><span className="s-pill" aria-hidden="true">Search gifts</span></button>
             <Link className="icon-btn hide-sm" href="/account" aria-label="Account"><User /></Link>
             <Link className="icon-btn" href="/shop?saved=1" aria-label="Wishlist"><Heart /><span className="count" data-n={wish.length}>{wish.length}</span></Link>
             <button className="icon-btn" onClick={() => setOpen(true)} aria-label="Cart"><Bag /><span className="count" data-n={count}>{count}</span></button>
