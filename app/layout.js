@@ -20,7 +20,7 @@ export const metadata = {
   title: { default: 'The RBC Brand', template: '%s · The RBC Brand' },
   description: 'Personalised gifts, event souvenirs and home pieces from The RBC Brand, delivered across Nigeria.',
 };
-export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#FAF7F0' };
+export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#FBF9F5' };
 
 export default async function RootLayout({ children }) {
   const [products, ds, ann, lockSettings, h] = await Promise.all([getProducts(), getDealSettings(), getAnnouncement(), getLock(), headers()]);
