@@ -18,7 +18,7 @@ import { dealPicks, pctOff } from '@/lib/deals';
 
 export const metadata = {
   title: { default: 'The RBC Brand', template: '%s · The RBC Brand' },
-  description: 'Home finds, bath & beauty, kitchen helpers and gadgets, delivered across Nigeria.',
+  description: 'Personalised gifts, event souvenirs and home pieces from The RBC Brand, delivered across Nigeria.',
 };
 export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#FAF7F0' };
 

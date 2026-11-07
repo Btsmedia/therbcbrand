@@ -2,7 +2,7 @@ import ShopClient from '@/components/ShopClient';
 import { getProducts, getDealSettings } from '@/lib/catalog';
 import { dealPicks, pctOff } from '@/lib/deals';
 
-export const metadata = { title: 'Marketplace' };
+export const metadata = { title: 'Shop' };
 export const revalidate = 60;
 
 export default async function Shop({ searchParams }) {

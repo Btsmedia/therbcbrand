@@ -23,7 +23,7 @@ export default function CartDrawer({ products }) {
         </div>
         <div className="lines">
           {lines.length === 0 && (
-            <div className="empty"><h3>Your cart is empty</h3><p>Start with the pieces people keep coming back for.</p>
+            <div className="empty"><h3>Your bag is empty</h3><p>Start with a gift for someone, or something for your own space.</p>
               <Link className="btn btn-solid" href="/shop?sort=best" onClick={() => setOpen(false)}>Shop bestsellers</Link></div>
           )}
           {lines.map((l) => (

@@ -14,7 +14,7 @@ export default function VanitySet({ items }) {
         <div className="room-copy">
           <span className="eyebrow">Shop the set</span>
           <h2 id="room-h">Build your vanity corner</h2>
-          <p>{items.length} pieces that cover hair, scent and storage. Add them one by one or all together.</p>
+          <p>{items.length} pieces for hair, scent and storage. Add them one at a time, or all together.</p>
           <div className="room-list">
             {items.map((p, i) => (
               <div className="room-item" key={p.id}>

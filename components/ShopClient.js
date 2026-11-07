@@ -95,8 +95,8 @@ export default function ShopClient({ products, initial, deal }) {
   return (
     <>
       <section className="mk-hero"><div className="wrap">
-        <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><b>Marketplace</b></nav>
-        <div className="mk-title"><h1 className="display">The Marketplace</h1><p>Every RBC find in one place. Filter by category, colour or budget, and sort by price or what&apos;s new.</p></div>
+        <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><b>Shop</b></nav>
+        <div className="mk-title"><h1 className="display">The Shop</h1><p>Personalised gifts, event souvenirs and home pieces in one place. Filter by category, colour or budget.</p></div>
       </div></section>
       <section className="mk"><div className="wrap">
         <div className="mk-cats" role="tablist">

@@ -68,7 +68,7 @@ export default function CheckoutClient({ rates, products, email: signedEmail, ca
 
   if (ready && !lines.length) return (
     <div className="wrap" style={{ paddingBlock: 80, textAlign: 'center', display: 'grid', gap: 16, justifyItems: 'center' }}>
-      <h1 className="page-title">Your cart is empty</h1><Link className="btn btn-solid" href="/shop">Go to the marketplace</Link>
+      <h1 className="page-title">Your bag is empty</h1><Link className="btn btn-solid" href="/shop">Go to the shop</Link>
     </div>
   );
 

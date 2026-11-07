@@ -8,7 +8,7 @@ import { Search, User, Heart, Bag, Menu, Close, Flower } from './Icons';
 const NAV = [
   ['beauty', 'Bath & beauty'], ['gadgets', 'Gadgets'], ['kitchen', 'Kitchen'], ['lighting', 'Lighting'], ['storage', 'Storage'],
 ];
-const POPULAR = ['Hair dryer', 'Tripod', 'Lamp', 'Chopper', 'Speaker', 'Towel'];
+const POPULAR = ['Mug', 'Journal', 'Keychain', 'Lamp', 'Speaker', 'Hair dryer'];
 
 export default function Header({ deal, announcement }) {
   const { count, setOpen, wish } = useCart();
@@ -57,7 +57,7 @@ export default function Header({ deal, announcement }) {
                 <div className="mega"><div className="wrap">
                   <div><h4>Bath &amp; beauty</h4><ul><li><Link href="/shop?cat=beauty">Hair tools</Link></li><li><Link href="/shop?cat=beauty">Skincare</Link></li><li><Link href="/shop?cat=beauty">Towels &amp; bath</Link></li><li><Link href="/shop?cat=beauty">View all beauty</Link></li></ul></div>
                   <div><h4>Tech &amp; gadgets</h4><ul><li><Link href="/shop?cat=gadgets">Tripods &amp; stands</Link></li><li><Link href="/shop?cat=gadgets">Fill lights</Link></li><li><Link href="/shop?cat=gadgets">Speakers</Link></li><li><Link href="/shop?cat=gadgets">View all gadgets</Link></li></ul></div>
-                  <div><h4>Home</h4><ul><li><Link href="/shop?cat=kitchen">Kitchen helpers</Link></li><li><Link href="/shop?cat=lighting">Lighting</Link></li><li><Link href="/shop?cat=storage">Storage</Link></li><li><Link href="/shop?cat=decor">Decor</Link></li><li><Link href="/shop">The full marketplace</Link></li></ul></div>
+                  <div><h4>Home</h4><ul><li><Link href="/shop?cat=kitchen">Kitchen helpers</Link></li><li><Link href="/shop?cat=lighting">Lighting</Link></li><li><Link href="/shop?cat=storage">Storage</Link></li><li><Link href="/shop?cat=decor">Decor</Link></li><li><Link href="/shop">Everything in the shop</Link></li></ul></div>
                   {deal && <Link className="promo" href="/shop?sale=1"><img src={deal.img || '/img/7285.jpg'} alt="" /><div><strong>{deal.label}</strong><span>Up to {deal.maxOff}% off selected pieces</span></div></Link>}
                 </div></div>
               </li>
@@ -80,7 +80,7 @@ export default function Header({ deal, announcement }) {
         <div className="dr-head"><Link className="logo" href="/" style={{ fontSize: 26 }}>RBC</Link><button className="icon-btn" onClick={() => setMenu(false)} aria-label="Close menu"><Close /></button></div>
         <div />
         <nav className="mnav">
-          <MItem id="all" href="/shop">Shop all <small>Marketplace</small></MItem>
+          <MItem id="all" href="/shop">Shop all <small>Everything</small></MItem>
           <MItem id="beauty" href="/shop?cat=beauty">Bath &amp; beauty <small>Hair · Skin · Bath</small></MItem>
           <MItem id="gadgets" href="/shop?cat=gadgets">Tech &amp; gadgets <small>Tripods · Lights</small></MItem>
           <MItem id="kitchen" href="/shop?cat=kitchen">Kitchen</MItem>
