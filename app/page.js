@@ -19,7 +19,7 @@ function Tile({ href, img, eyebrow, title, cta, big }) {
   return (
     <Link className={`tile ptile ${big ? 'big' : ''}`} href={href}>
       <img src={`/img/${img}.jpg`} alt="" loading="lazy" />
-      <div className="cap">{eyebrow && <span className="eyebrow">{eyebrow}</span>}<h3>{title}</h3><span className="link-arrow">{cta} <Arrow /></span></div>
+      <div className="cap"><h3>{title}</h3><span className="link-arrow">{cta} <Arrow /></span></div>
     </Link>
   );
 }
@@ -45,7 +45,7 @@ export default async function Home() {
       </div></div>
 
       <section aria-labelledby="dep-h"><div className="wrap">
-        <div className="sec-head"><div><span className="eyebrow">Browse</span><h2 id="dep-h">Shop by category</h2></div><Link className="link-arrow" href="/shop">View all <Arrow /></Link></div>
+        <div className="sec-head"><div><h2 id="dep-h">Shop by category</h2></div><Link className="link-arrow" href="/shop">View all <Arrow /></Link></div>
         <div className="depts">
           {DEPTS.map(([n, img, f, t]) => { const c = products.filter((p) => p.categories.includes(f)).length; return (
             <Link key={f} className="dept" href={`/shop?cat=${f}`}><span className="disc" style={{ background: `var(--${t})` }}><img className="pimg" src={`/img/${img}.jpg`} alt="" loading="lazy" /></span><h3>{n}</h3><small>{c} piece{c === 1 ? '' : 's'}</small></Link>
@@ -66,7 +66,6 @@ export default async function Home() {
         <section id="sale" style={{ paddingTop: 0 }} aria-labelledby="sale-h"><div className="wrap"><div className="split">
           <div className={`pic deal-pics n${dealPics.length}`}>{dealPics.map((p) => <Link key={p.id} className="dp" href={`/product/${p.slug}`}><img src={p.images[0]} alt={p.name} loading="lazy" /><span className="badge sale">−{Math.round((1 - p.price / p.compare_at) * 100)}%</span></Link>)}</div>
           <div className="txt">
-            <span className="eyebrow">{ds.eyebrow}</span>
             <h2 id="sale-h">{ds.title} <span>{ds.highlight}</span></h2><hr />
             <p>{ds.blurb}</p>
             <div className="codes"><div><strong>Up to {maxOff}%</strong><span>off selected items</span></div><div><strong>{deals.length}</strong><span>pieces on offer</span></div></div><hr />
@@ -81,7 +80,6 @@ export default async function Home() {
         <section className="story" aria-labelledby="story-h"><div className="wrap">
           <div className="story-top">
             <div>
-              <span className="eyebrow">{ss.eyebrow}</span>
               <h2 id="story-h">{spot.name}</h2>
               <p>{ss.blurb || spot.description}</p>
               <div className="spec"><span><b>{naira(spot.price)}</b></span>{spot.reviewCount > 0 && <span><b>{spot.rating.toFixed(1)}</b> from {spot.reviewCount} reviews</span>}</div>
@@ -97,7 +95,7 @@ export default async function Home() {
       <div className="marquee" aria-hidden="true"><div className="track">{[...WORDS, ...WORDS].map((w, i) => <span key={i}>{w}</span>)}</div></div>
 
       <section aria-label="Edits"><div className="wrap">
-        <div className="sec-head"><div><span className="eyebrow">Edits</span><h2>Two places to start</h2></div></div>
+        <div className="sec-head"><div><h2>Two places to start</h2></div></div>
         <div className="two">
           <Tile href="/shop?cat=gadgets" img="7234" eyebrow="The creator edit" title="Set up for content" cta="Shop gadgets" />
           <Tile href="/shop?cat=beauty" img="7272" eyebrow="The travel edit" title="Pack light, arrive fresh" cta="Shop travel minis" />
@@ -105,13 +103,13 @@ export default async function Home() {
       </div></section>
 
       <section style={{ paddingTop: 0 }} aria-labelledby="fit-h"><div className="wrap fit">
-        <div><span className="eyebrow">Shortcuts</span><h2 id="fit-h">Find the right gift sooner</h2></div>
+        <div><h2 id="fit-h">Find the right gift sooner</h2></div>
         <div className="chips">{CHIPS.map(([n, h]) => <Link key={n} className="chip" href={h}>{n} <small>→</small></Link>)}</div>
       </div></section>
 
       {reviews.length > 0 && (
         <section style={{ paddingTop: 0 }} aria-labelledby="rev-h"><div className="wrap">
-          <div className="sec-head"><div><span className="eyebrow">Reviews</span><h2 id="rev-h">Notes from customers</h2></div></div>
+          <div className="sec-head"><div><h2 id="rev-h">Notes from customers</h2></div></div>
           <div className="reviews">{reviews.map((r) => { const img = (r.products?.product_images || []).sort((a, b) => a.position - b.position)[0]?.url; return (
             <article className="review" key={r.id}><Stars value={r.rating} /><h3>{r.title || r.products?.name}</h3><p>{r.body}</p>
               <footer><Link className="th tone-1" href={`/product/${r.products?.slug}`}>{img && <img className="pimg" src={img} alt="" />}</Link><span>{r.author_name}{r.city ? `, ${r.city}` : ''} · <b>{r.products?.name}</b></span></footer></article>

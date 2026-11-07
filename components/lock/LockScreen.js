@@ -24,7 +24,6 @@ export default function LockScreen({ lock, whatsapp, preview = false }) {
       <div className="lk-in">
         <div className="lk-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="9" fill="currentColor" /><text x="16" y="22" textAnchor="middle" fontFamily="Gloock, Georgia, serif" fontSize="16" fill="var(--lk-bg)">R</text></svg>RBC</div>
         {lock.template === 'launch' ? <Mascot /> : <img className="lk-hero" src={`/email/hero/${lock.hero}.png`} alt="" width="560" height="240" />}
-        <span className="lk-eyebrow">{lock.eyebrow}</span>
         <h1 className="lk-title">{lock.title}</h1>
         {lock.badge && <span className="lk-badge">{lock.badge}</span>}
         <p className="lk-msg">{lock.message}</p>        {showCount && <Countdown until={lock.until} autoOpen={lock.autoOpen} />}

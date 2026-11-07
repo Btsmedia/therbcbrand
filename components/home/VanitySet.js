@@ -12,7 +12,6 @@ export default function VanitySet({ items }) {
     <section id="room" aria-labelledby="room-h">
       <div className="wrap room">
         <div className="room-copy">
-          <span className="eyebrow">Shop the set</span>
           <h2 id="room-h">Build your vanity corner</h2>
           <p>{items.length} pieces for hair, scent and storage. Add them one at a time, or all together.</p>
           <div className="room-list">

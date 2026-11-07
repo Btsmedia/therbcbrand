@@ -25,7 +25,6 @@ export default function HeroSlider() {
           <div key={i} className={`slide photo ${i === cur ? 'on' : ''}`} style={{ '--sb': `var(--${s.tone})` }} aria-hidden={i !== cur}>
             <div className="wrap hs">
               <div className="inner">
-                <span className="eyebrow">{s.eyebrow}</span>
                 {i === 0 ? <h1>{s.title}</h1> : <h2>{s.title}</h2>}
                 <p className="lede">{s.lede}</p>
                 <div className="ctas">{s.ctas.map(([t, h, k]) => <Link key={t} className={`btn btn-${k}`} href={h} tabIndex={i === cur ? 0 : -1}>{t}</Link>)}</div>

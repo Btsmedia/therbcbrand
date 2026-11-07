@@ -146,7 +146,7 @@ function FragmentWithPromo({ children, showPromo, deal }) {
     <>
       {showPromo && (
         <Link className="promo-card" href="/shop?sale=1"><img className="pc-img" src={deal.img || '/img/7283.jpg'} alt="" loading="lazy" />
-          <div><span className="eyebrow">{deal.eyebrow}</span><h3>{deal.title} {deal.highlight}</h3><p>{deal.blurb}</p><span className="link-arrow">{deal.cta} <Arrow /></span></div></Link>
+          <div><h3>{deal.title} {deal.highlight}</h3><p>{deal.blurb}</p><span className="link-arrow">{deal.cta} <Arrow /></span></div></Link>
       )}
       {children}
     </>

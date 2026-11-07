@@ -11,7 +11,7 @@ export default function Rail({ eyebrow, title, id, tabs, products }) {
     <section id={id} style={{ paddingTop: 0 }} aria-labelledby={`${id}-h`}>
       <div className="wrap">
         <div className="sec-head">
-          <div><span className="eyebrow">{eyebrow}</span><h2 id={`${id}-h`}>{title}</h2></div>
+          <div><h2 id={`${id}-h`}>{title}</h2></div>
           <div className="head-tools">
             <div className="tabs" role="tablist">
               {tabs.map(([k, n]) => <button key={k} className="tab" role="tab" aria-selected={f === k} onClick={() => { setF(k); if (ref.current) ref.current.scrollLeft = 0; }}>{n}</button>)}
