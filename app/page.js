@@ -4,7 +4,7 @@ import Rail from '@/components/home/Rail';
 import VanitySet from '@/components/home/VanitySet';
 import { Arrow } from '@/components/Icons';
 import Stars from '@/components/Stars';
-import { getProducts, getDealSettings, getSpotlight } from '@/lib/catalog';
+import { getProducts, getDealSettings, getSpotlight, getHomeTiles } from '@/lib/catalog';
 import { dealPicks } from '@/lib/deals';
 import { getLatestReviews } from '@/lib/reviews';
 import { naira } from '@/lib/format';
@@ -15,17 +15,17 @@ const DEPTS = [['Bath & beauty', '7278', 'beauty', 't3'], ['Gadgets', '7242', 'g
 const CHIPS = [['New arrivals', '/shop?sort=new'], ['Bestsellers', '/shop?sort=best'], ['Deals', '/shop?sale=1'], ['Under ₦10,000', '/shop?max=9999'], ['Gifts under ₦25,000', '/shop?max=25000'], ['For creators', '/shop?cat=gadgets'], ['For the kitchen', '/shop?cat=kitchen'], ['Small spaces', '/shop?cat=storage']];
 const WORDS = ['Personalised gifts', 'Event souvenirs', 'Keepsakes', 'Home pieces', 'Nationwide delivery', 'Gift-ready'];
 
-function Tile({ href, img, eyebrow, title, cta, big }) {
+function Tile({ href, img, title, cta, big }) {
   return (
     <Link className={`tile ptile ${big ? 'big' : ''}`} href={href}>
-      <img src={`/img/${img}.jpg`} alt="" loading="lazy" />
+      <img src={img} alt="" loading="lazy" />
       <div className="cap"><h3>{title}</h3><span className="link-arrow">{cta} <Arrow /></span></div>
     </Link>
   );
 }
 
 export default async function Home() {
-  const [products, reviews, ds, ss] = await Promise.all([getProducts(), getLatestReviews(3), getDealSettings(), getSpotlight()]);
+  const [products, reviews, ds, ss, tiles] = await Promise.all([getProducts(), getLatestReviews(3), getDealSettings(), getSpotlight(), getHomeTiles()]);
   const deals = products.filter((p) => p.compare_at && p.compare_at > p.price);
   const maxOff = deals.reduce((m, p) => Math.max(m, Math.round((1 - p.price / p.compare_at) * 100)), 0);
   // chosen in admin; hidden if switched off or the product isn't live any more
@@ -54,9 +54,7 @@ export default async function Home() {
       </div></section>
 
       <section style={{ paddingTop: 0 }} aria-label="Collections"><div className="wrap collage">
-        <Tile big href="/shop?cat=lighting" img="7236" eyebrow="For the home" title="Soft light for evenings in" cta="Shop lighting" />
-        <Tile href="/shop?cat=beauty" img="7254" title="A calmer bathroom shelf" cta="Shop bath & beauty" />
-        <Tile href="/shop?cat=storage" img="7259" title="A place for everything" cta="Shop storage" />
+        {tiles.collage.map((t, i) => <Tile key={i} big={i === 0} {...t} />)}
       </div></section>
 
       <Rail id="edit" eyebrow="New in" title="The RBC Edit" products={products} tabs={[['new', 'New in'], ['beauty', 'Bath & beauty'], ['gadgets', 'Gadgets'], ['kitchen', 'Kitchen']]} />
@@ -94,13 +92,10 @@ export default async function Home() {
 
       <div className="marquee" aria-hidden="true"><div className="track">{[...WORDS, ...WORDS].map((w, i) => <span key={i}>{w}</span>)}</div></div>
 
-      <section aria-label="Edits"><div className="wrap">
-        <div className="sec-head"><div><h2>Two places to start</h2></div></div>
-        <div className="two">
-          <Tile href="/shop?cat=gadgets" img="7234" eyebrow="The creator edit" title="Set up for content" cta="Shop gadgets" />
-          <Tile href="/shop?cat=beauty" img="7272" eyebrow="The travel edit" title="Pack light, arrive fresh" cta="Shop travel minis" />
-        </div>
-      </div></section>
+      {tiles.editsOn && <section aria-label="Edits"><div className="wrap">
+        <div className="sec-head"><div><h2>{tiles.editsHeading}</h2></div></div>
+        <div className="two">{tiles.edits.map((t, i) => <Tile key={i} {...t} />)}</div>
+      </div></section>}
 
       <section style={{ paddingTop: 0 }} aria-labelledby="fit-h"><div className="wrap fit">
         <div><h2 id="fit-h">Find the right gift sooner</h2></div>
