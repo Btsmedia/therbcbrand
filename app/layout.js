@@ -20,7 +20,7 @@ export const metadata = {
   title: { default: 'The RBC Brand', template: '%s · The RBC Brand' },
   description: 'Personalised gifts, event souvenirs and home pieces from The RBC Brand, delivered across Nigeria.',
 };
-export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#FBF9F5' };
+export const viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: [{ media: '(prefers-color-scheme: light)', color: '#FBF9F5' }, { media: '(prefers-color-scheme: dark)', color: '#18120E' }] };
 
 export default async function RootLayout({ children }) {
   const [products, ds, ann, lockSettings, h] = await Promise.all([getProducts(), getDealSettings(), getAnnouncement(), getLock(), headers()]);
@@ -49,11 +49,12 @@ export default async function RootLayout({ children }) {
   const onSale = products.filter((p) => pctOff(p) > 0);
   const deal = onSale.length ? { label: `${ds.title} ${ds.highlight}`.trim(), maxOff: Math.max(...onSale.map(pctOff)), img: dealPicks(onSale, ds.picks)[0]?.images[0] } : null;
   return (
-    <html lang="en-NG">
+    <html lang="en-NG" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Manrope:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+        <script dangerouslySetInnerHTML={{ __html: "try{var t=localStorage.getItem('rbc_theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}" }} />
       </head>
       <body>
         <Suspense fallback={null}><NavProgress /></Suspense>

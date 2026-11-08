@@ -1,4 +1,5 @@
 'use client';
+import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -28,6 +29,7 @@ export default function Footer() {
         </div>
         <div className="foot-bottom">
           <span>© {new Date().getFullYear()} The RBC Brand · NG / NGN ₦</span>
+          <ThemeSwitch />
           <div className="pay"><span>VISA</span><span>MASTERCARD</span><span>VERVE</span><span>TRANSFER</span><span>USSD</span><span>OPAY</span></div>
         </div>
         <div className="wordmark" aria-hidden="true">RBC</div>
