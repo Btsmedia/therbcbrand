@@ -183,11 +183,11 @@ footer.site{margin:24px var(--inset) var(--inset);border-radius:var(--r-xl);padd
    Dark follows the phone's setting unless the shopper picks Light or Dark in the footer. */
 :root{
   --bg:#FBF9F5; --surface:#FFFFFF; --soft:#F4EFE8; --ink:#3A2B21; --muted:#8C7D6F; --line:#EDE6DC;
-  --azalea:#8A6A51; --on-azalea:#FFFFFF; --leaf:#8A6A51; --on-ink:#FFFFFF;
+  --azalea:#8C6A1A; --on-azalea:#FFFFFF; --leaf:#8C6A1A; --on-ink:#FFFFFF; --gold:#C9A34E;
   --deep:#F1EBE2; --on-deep:#3A2B21; --deep-muted:#7F7062;
   --t1:#F6F1EA; --t2:#F3EDE4; --t3:#F0E9DF; --t4:#F7F3ED; --t5:#F2ECE3;
   --hero-ink:#3A2B21; --hero-muted:#7F7062; --hero-btn:#3A2B21; --hero-btn-ink:#FFFFFF;
-  --well:#F4F1EC; --tag:#D8C3AC; --hair:#CFC4B6; --glass:rgba(255,255,255,.92); --fade:251,249,245; --mark-line:#D9CBBB;
+  --well:#F4F1EC; --tag:#EADBB0; --hair:#CFC4B6; --glass:rgba(255,255,255,.92); --fade:251,249,245; --mark-line:#D9CBBB;
   --good:#1A7F4B; --warn:#8A5A12; --err:#B3261E;
   --scrim:rgba(58,43,33,.28); color-scheme:light;
   --sh:0 1px 2px rgba(58,43,33,.04),0 10px 28px -20px rgba(58,43,33,.22);
@@ -195,11 +195,11 @@ footer.site{margin:24px var(--inset) var(--inset);border-radius:var(--r-xl);padd
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#18120E; --surface:#221A15; --soft:#2C231D; --ink:#EFE6DB; --muted:#A99A8B; --line:#382D25;
-  --azalea:#D4B393; --on-azalea:#18120E; --leaf:#D4B393; --on-ink:#18120E;
+  --azalea:#D9B45A; --on-azalea:#18120E; --leaf:#D9B45A; --on-ink:#18120E; --gold:#D9B45A;
   --deep:#201913; --on-deep:#EFE6DB; --deep-muted:#A99A8B;
   --t1:#211A15; --t2:#231B16; --t3:#251D17; --t4:#1F1813; --t5:#241C17;
   --hero-ink:#EFE6DB; --hero-muted:#B5A697; --hero-btn:#EFE6DB; --hero-btn-ink:#18120E;
-  --well:#261E18; --tag:#4B3B2F; --hair:#4A3D33; --glass:rgba(34,26,21,.88); --fade:24,18,14; --mark-line:#4A3D33;
+  --well:#261E18; --tag:#5A4720; --hair:#4A3D33; --glass:rgba(34,26,21,.88); --fade:24,18,14; --mark-line:#4A3D33;
   --good:#7ACB9A; --warn:#E2B672; --err:#F09A8C;
   --scrim:rgba(0,0,0,.55); color-scheme:dark;
   --sh:0 1px 2px rgba(0,0,0,.25),0 12px 30px -20px rgba(0,0,0,.6);
@@ -207,11 +207,11 @@ footer.site{margin:24px var(--inset) var(--inset);border-radius:var(--r-xl);padd
 }}
 :root[data-theme="dark"]{
   --bg:#18120E; --surface:#221A15; --soft:#2C231D; --ink:#EFE6DB; --muted:#A99A8B; --line:#382D25;
-  --azalea:#D4B393; --on-azalea:#18120E; --leaf:#D4B393; --on-ink:#18120E;
+  --azalea:#D9B45A; --on-azalea:#18120E; --leaf:#D9B45A; --on-ink:#18120E; --gold:#D9B45A;
   --deep:#201913; --on-deep:#EFE6DB; --deep-muted:#A99A8B;
   --t1:#211A15; --t2:#231B16; --t3:#251D17; --t4:#1F1813; --t5:#241C17;
   --hero-ink:#EFE6DB; --hero-muted:#B5A697; --hero-btn:#EFE6DB; --hero-btn-ink:#18120E;
-  --well:#261E18; --tag:#4B3B2F; --hair:#4A3D33; --glass:rgba(34,26,21,.88); --fade:24,18,14; --mark-line:#4A3D33;
+  --well:#261E18; --tag:#5A4720; --hair:#4A3D33; --glass:rgba(34,26,21,.88); --fade:24,18,14; --mark-line:#4A3D33;
   --good:#7ACB9A; --warn:#E2B672; --err:#F09A8C;
   --scrim:rgba(0,0,0,.55); color-scheme:dark;
   --sh:0 1px 2px rgba(0,0,0,.25),0 12px 30px -20px rgba(0,0,0,.6);
@@ -379,3 +379,13 @@ h1,h2,h3,.display,.page-title{font-weight:500;letter-spacing:-.025em}
 /* dark: soften the pale placeholder photos so they don't glare */
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) img[src^="/img/"]{filter:brightness(.6) saturate(.85)}}
 :root[data-theme="dark"] img[src^="/img/"]{filter:brightness(.6) saturate(.85)}
+
+/* gold accents */
+.dot i,.pc-dots button.on::after{background:var(--gold)}
+.marquee span::after{background:var(--gold)}
+.pc-tags span.sale{background:var(--azalea);color:var(--on-azalea)}
+.badge.sale{background:var(--azalea);color:var(--on-azalea)}
+.apc-sw i{box-shadow:none}
+.perk svg{color:var(--azalea)}
+.logo svg rect{stroke:var(--gold)}
+.chip:hover,.tab[aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--gold)}
