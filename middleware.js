@@ -33,4 +33,4 @@ export async function middleware(request) {
   return response;
 }
 
-export const config = { matcher: ['/((?!_next/static|_next/image|img/|favicon.ico|api/paystack|api/opay).*)'] };
+export const config = { matcher: ['/((?!_next/static|_next/image|img/|az/|products/|email/|favicon.ico|api/paystack|api/opay).*)'] };
