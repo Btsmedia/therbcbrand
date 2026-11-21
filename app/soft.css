@@ -411,3 +411,14 @@ h1,h2,h3,.display,.page-title{font-weight:500;letter-spacing:-.025em}
   .slide.photo h1,.slide.photo h2{margin:0 0 12px}
   .slide p.lede{margin-bottom:22px}
 }
+
+/* hero bento: real products with a name + price label */
+.stack .hp{display:block;position:relative;overflow:hidden;background:var(--well)}
+.stack .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.stack .hp:hover img{transform:scale(1.04)}
+.hp-cap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 8px 8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:var(--sh);color:var(--ink);font-size:13px}
+.hp-cap b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hp-cap span{flex:none;font-weight:600;color:var(--azalea);background:var(--soft);border-radius:999px;padding:3px 10px}
+.stack .hp:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:760px){.hp-cap{left:6px;right:6px;bottom:6px;padding:6px 6px 6px 10px;font-size:11.5px}.stack .ph.p2 .hp-cap b,.stack .ph.p3 .hp-cap b{display:none}.stack .ph.p2 .hp-cap,.stack .ph.p3 .hp-cap{left:auto;padding:4px}}
+@media (prefers-reduced-motion:reduce){.stack .hp img{transition:none}}

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { naira } from '@/lib/format';
 
 const SLIDES = [
   { tone: 't3', eyebrow: 'Personalised gifts · Made to order', title: 'Gifts with their name on it', lede: 'Mugs, journals, bottles and keepsakes, printed with a name, a photo or a few words of your own.', ctas: [['Personalise a gift', '/shop', 'solid'], ['Browse all gifts', '/shop', 'line']], imgs: ['7246', '7278', '7247'] },
@@ -8,7 +9,7 @@ const SLIDES = [
   { tone: 't2', eyebrow: 'For the home', title: 'Quiet pieces for everyday rooms', lede: 'Bath, kitchen, lighting and storage finds, chosen to give or to keep.', ctas: [['Shop home pieces', '/shop', 'solid']], imgs: ['7244', '7248', '7317'] },
 ];
 
-export default function HeroSlider() {
+export default function HeroSlider({ picks = [] }) {
   const [cur, setCur] = useState(0);
   const tx = useRef(null);
   useEffect(() => {
@@ -29,8 +30,14 @@ export default function HeroSlider() {
                 <p className="lede">{s.lede}</p>
                 <div className="ctas">{s.ctas.map(([t, h, k]) => <Link key={t} className={`btn btn-${k}`} href={h} tabIndex={i === cur ? 0 : -1}>{t}</Link>)}</div>
               </div>
-              <div className="stack" aria-hidden="true">
-                {s.imgs.map((n, j) => <figure key={n} className={`ph p${j + 1}`}><img src={`/img/${n}.jpg`} alt="" loading={i === 0 ? 'eager' : 'lazy'} /></figure>)}
+              <div className="stack">
+                {(picks[i]?.length === 3 ? picks[i] : null)
+                  ? picks[i].map((p, j) => (
+                    <Link key={p.slug} href={`/product/${p.slug}`} className={`ph p${j + 1} hp`} tabIndex={i === cur ? 0 : -1} aria-label={`${p.name}, ${naira(p.price)}`}>
+                      <img src={p.img} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+                      <span className="hp-cap"><b>{p.name}</b><span>{naira(p.price)}</span></span>
+                    </Link>))
+                  : s.imgs.map((n, j) => <figure key={n} className={`ph p${j + 1}`} aria-hidden="true"><img src={`/img/${n}.jpg`} alt="" loading={i === 0 ? 'eager' : 'lazy'} /></figure>)}
               </div>
             </div>
           </div>

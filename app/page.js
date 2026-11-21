@@ -24,6 +24,29 @@ function Tile({ href, img, title, cta, big }) {
   );
 }
 
+
+// three products per hero slide, matched to the slide's theme (gifts, souvenirs, home), in stock and with a photo
+function heroPicks(products) {
+  const ok = products.filter((p) => p.images.length && p.variants.some((v) => v.stock > 0));
+  const featured = (p) => (p.badge ? 2 : 0) + (p.tags.includes('bestseller') ? 2 : 0) + (p.tags.includes('new') ? 1 : 0);
+  const byCats = (cats) => ok.filter((p) => cats.includes(p.category)).sort((a, b) => featured(b) - featured(a));
+  const pools = [
+    [...ok.filter((p) => p.personalise), ...byCats(['decor', 'kitchen'])],
+    [...byCats(['decor', 'gadgets']), ...byCats(['beauty'])],
+    [...byCats(['lighting', 'storage']), ...byCats(['kitchen'])],
+  ];
+  const used = new Set();
+  return pools.map((pool) => {
+    const out = [];
+    for (const p of [...pool, ...ok]) {
+      if (out.length === 3) break;
+      if (used.has(p.id)) continue;
+      used.add(p.id); out.push({ slug: p.slug, name: p.name, price: p.price, img: p.images[0] });
+    }
+    return out;
+  });
+}
+
 export default async function Home() {
   const [products, reviews, ds, ss, tiles] = await Promise.all([getProducts(), getLatestReviews(3), getDealSettings(), getSpotlight(), getHomeTiles()]);
   const deals = products.filter((p) => p.compare_at && p.compare_at > p.price);
@@ -35,7 +58,7 @@ export default async function Home() {
 
   return (
     <>
-      <HeroSlider />
+      <HeroSlider picks={heroPicks(products)} />
 
       <div className="trustbar" aria-label="Why shop with RBC"><div className="wrap trustbar-in">
         <span><b>Nationwide delivery</b> in 1 to 3 days</span>
