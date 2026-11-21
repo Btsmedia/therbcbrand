@@ -30,8 +30,6 @@ export default function LockScreen({ lock, whatsapp, preview = false }) {
         {lock.notify && <NotifyForm reason={lock.template} cta={lock.cta} />}
         <div className="lk-links">
           {wa && <a href={`https://wa.me/${wa}?text=${encodeURIComponent('Hi, I have a question.')}`} target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>}
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a>
           <a href="/account">Track an order</a>
         </div>
       </div>

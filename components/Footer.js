@@ -25,7 +25,7 @@ export default function Footer() {
             <li><Link href="/shop?cat=beauty">Bath &amp; beauty</Link></li><li><Link href="/shop?cat=gadgets">Tech &amp; gadgets</Link></li><li><Link href="/shop?cat=kitchen">Kitchen</Link></li><li><Link href="/shop?cat=lighting">Lighting</Link></li><li><Link href="/shop?cat=storage">Storage</Link></li><li><Link href="/shop?sale=1">Deals</Link></li><li><Link href="/shop">Shop all</Link></li>
           </ul></div>
           <div id="help"><h4>Help</h4><ul><li><Link href="/account">Track an order</Link></li><li><Link href="/policies#delivery">Delivery</Link></li><li><Link href="/policies#returns">Help with an order</Link></li><li><Link href="/policies#privacy">Privacy</Link></li></ul></div>
-          <div><h4>RBC</h4><ul><li><Link href="/account">My account</Link></li><li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li></ul></div>
+          <div><h4>RBC</h4><ul><li><Link href="/account">My account</Link></li><li><a href="https://wa.me/2348142749272" target="_blank" rel="noopener noreferrer">WhatsApp us</a></li><li><a href="mailto:therbcbrandofficial@gmail.com">therbcbrandofficial@gmail.com</a></li></ul></div>
         </div>
         <div className="foot-bottom">
           <span>© {new Date().getFullYear()} The RBC Brand · NG / NGN ₦</span>
