@@ -9,12 +9,13 @@ import { limited } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
-// Runs daily (Supabase pg_cron calls it): asks customers for a review 2 days after their order
-// is marked delivered. Calling it early does nothing extra: each order is only ever asked about once.
+// Optional daily job: asks customers for a review 2 days after their order is marked delivered.
+// Off unless CRON_SECRET is set in Vercel and the scheduler sends it, so nobody can trigger sends.
 async function run(req) {
   if (!hasSupabase || !hasServiceRole || !process.env.RESEND_API_KEY) return NextResponse.json({ ok: false, error: 'not set up' }, { status: 503 });
   const secret = process.env.CRON_SECRET;
-  if (secret && req.headers.get('authorization') !== `Bearer ${secret}`) return NextResponse.json({ ok: false }, { status: 401 });
+  if (!secret) return NextResponse.json({ ok: false, error: 'automatic review requests are off' }, { status: 503 });
+  if (req.headers.get('authorization') !== `Bearer ${secret}`) return NextResponse.json({ ok: false }, { status: 401 });
   if (limited(req, 'cron-reviews', 4, 10 * 60 * 1000)) return NextResponse.json({ ok: false }, { status: 429 });
   const db = createAdminClient();
   const q = await reviewQueue(db, { dueOnly: true });
