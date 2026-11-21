@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Stars from '../Stars';
 import { Close } from '../Icons';
 import { fmtDate } from '@/lib/format';
@@ -14,6 +14,12 @@ export default function Reviews({ product, reviews, access }) {
   const [mediaOnly, setMediaOnly] = useState(false);
   const [open, setOpen] = useState(false);
   const [lightbox, setLightbox] = useState(null);
+  // arriving from a "write a review" email link: open the form if they can review
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('review') !== '1') return;
+    if (access.enabled && access.userId && access.bought && !access.existing) setOpen(true);
+    document.getElementById('reviews')?.scrollIntoView({ block: 'start' });
+  }, [access]);
   const n = reviews.length;
   const avg = n ? reviews.reduce((a, r) => a + r.rating, 0) / n : 0;
   const dist = [5, 4, 3, 2, 1].map((s) => reviews.filter((r) => r.rating === s).length);
@@ -94,7 +100,7 @@ export default function Reviews({ product, reviews, access }) {
 
 function WriteButton({ access, productSlug, onOpen }) {
   if (!access.enabled) return null;
-  if (!access.userId) return <Link className="btn btn-line" href={`/account?next=/product/${productSlug}%23reviews`}>Sign in to write a review</Link>;
+  if (!access.userId) return <Link className="btn btn-line" href={`/account?next=/product/${productSlug}%3Freview%3D1%23reviews`}>Sign in to write a review</Link>;
   if (access.existing) return <p className="hint">{access.existing === 'pending' ? 'Thanks! Your review is waiting for approval.' : 'You have reviewed this product.'}</p>;
   if (!access.bought) return <p className="hint">Reviews are open to customers who bought this item.</p>;
   return <button className="btn btn-line" onClick={onOpen}>Write a review</button>;

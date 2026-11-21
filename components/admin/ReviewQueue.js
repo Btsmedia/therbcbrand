@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import ReviewAsk from './ReviewAsk';
 import { useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 import Stars from '../Stars';
@@ -18,6 +19,7 @@ export default function ReviewQueue({ reviews, status }) {
   return (
     <>
       <h1>Reviews</h1>
+      <ReviewAsk />
       <div className="tabs">{[['pending', 'Waiting'], ['approved', 'Published'], ['rejected', 'Rejected']].map(([k, l]) => <Link key={k} className="tab" aria-selected={status === k} href={`/admin/reviews?status=${k}`}>{l}</Link>)}</div>
       <p className="hint">Only customers who paid for the product can submit a review. Check photos and videos before approving. Nothing shows in the store until you do.</p>
       {err && <p className="notice err">{err}</p>}
