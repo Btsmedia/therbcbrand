@@ -122,6 +122,9 @@ export async function POST(req) {
   const { error: iErr } = await db.from('order_items').insert(lines.map(({ categories, ...l }) => ({ ...l, order_id: order.id })));
   if (iErr) { console.error(iErr); await db.from('orders').delete().eq('id', order.id); return bad('We couldn’t save your order items. Please try again.', 500); }
 
+  // an order was placed, so stop any bag reminders for this email
+  await db.from('abandoned_carts').update({ recovered_at: new Date().toISOString() }).eq('email', email).then(() => {}, () => {});
+
   // 5. hand over to the payment provider
   const testUrl = `/pay/test?order=${order.id}`;
   try {

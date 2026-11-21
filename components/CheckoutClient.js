@@ -25,6 +25,24 @@ export default function CheckoutClient({ rates, products, email: signedEmail, ca
   const [formErr, setFormErr] = useState('');
   const [busy, setBusy] = useState(false);
   const [sumOpen, setSumOpen] = useState(false);
+  // coming back from a bag reminder email: fill in the email and name we saved
+  useEffect(() => {
+    try {
+      const pre = JSON.parse(sessionStorage.getItem('rbc_co_prefill') || 'null');
+      if (pre) { sessionStorage.removeItem('rbc_co_prefill'); setF((x) => ({ ...x, email: x.email || pre.email || '', first: x.first || pre.first || '' })); }
+    } catch {}
+  }, []);
+  // save the bag against the email, so we can send a reminder if checkout isn't finished
+  const saveSig = useMemo(() => JSON.stringify([f.email.trim().toLowerCase(), f.first.trim(), lines.map((l) => [l.variantId, l.qty, !!l.personalise, l.custom || '', l.customPhoto || ''])]), [f.email, f.first, lines]);
+  useEffect(() => {
+    if (!ready || !canOrder || !lines.length || !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(f.email.trim())) return;
+    const t = setTimeout(() => {
+      fetch('/api/cart/save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+        body: JSON.stringify({ email: f.email.trim(), first: f.first.trim(), items: lines.map((l) => ({ variantId: l.variantId, qty: l.qty, personalise: l.personalise, custom: l.custom, customPhoto: l.customPhoto })) }) }).catch(() => {});
+    }, 1500);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [saveSig, ready, canOrder]);
   const set = (k) => (e) => { setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }); setErrs({ ...errs, [k]: '' }); };
 
   // refresh prices from the live catalogue in case they changed since the item was added
@@ -108,6 +126,7 @@ export default function CheckoutClient({ rates, products, email: signedEmail, ca
             <div className="co-sec">
               <div className="sh"><h2>Your details</h2>{!signedEmail && <small><Link href="/account?next=/checkout" style={{ textDecoration: 'underline' }}>Sign in</Link></small>}</div>
               <Field id="co-email" label="Email" err={errs.email}><input id="co-email" type="email" autoComplete="email" inputMode="email" value={f.email} onChange={set('email')} /></Field>
+              <p className="co-hint" style={{ fontSize: 12.5, color: 'var(--muted)', margin: '-6px 0 14px' }}>If you don&apos;t finish, we&apos;ll send a reminder with a link back to your bag.</p>
               <Field id="co-phone" label="Phone (WhatsApp)" err={errs.phone}><input id="co-phone" type="tel" autoComplete="tel" inputMode="tel" value={f.phone} onChange={set('phone')} /></Field>
               <div className="row2">
                 <Field id="co-first" label="First name" err={errs.first}><input id="co-first" autoComplete="given-name" value={f.first} onChange={set('first')} /></Field>
