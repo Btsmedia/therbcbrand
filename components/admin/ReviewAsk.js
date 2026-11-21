@@ -24,8 +24,8 @@ export default function ReviewAsk() {
       <h3 style={{ margin: '0 0 6px', fontSize: 17 }}>Ask buyers for a review</h3>
       <p className="hint" style={{ margin: '0 0 12px' }}>
         {info.customers
-          ? `${info.customers} customer${info.customers === 1 ? ' has' : 's have'} a delivered order and hasn’t been asked yet. Each gets one thank-you email with a link to review what they bought.`
-          : 'Everyone with a delivered order has been asked. New deliveries show up here.'}
+          ? `${info.customers} customer${info.customers === 1 ? ' is' : 's are'} waiting. The thank-you email goes out by itself 2 days after an order is marked delivered, or you can send it now.`
+          : 'Everyone with a delivered order has been asked. The thank-you email goes out by itself 2 days after each new delivery.'}
       </p>
       {info.customers > 0 && (
         <details style={{ marginBottom: 12 }}><summary className="hint" style={{ cursor: 'pointer' }}>See who</summary>
