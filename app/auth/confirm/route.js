@@ -13,7 +13,7 @@ export async function GET(request) {
     const dest = new URL(next, url.origin);
     if (dest.origin === url.origin) safeNext = dest.pathname + dest.search + dest.hash;
   }
-  if (token_hash && ['email', 'magiclink', 'signup'].includes(type)) {
+  if (token_hash && ['email', 'magiclink', 'signup', 'invite', 'recovery', 'email_change'].includes(type)) {
     const supabase = await createClient();
     const { error } = await supabase.auth.verifyOtp({ token_hash, type });
     if (!error) { await supabase.rpc('claim_orders'); return NextResponse.redirect(new URL(safeNext, url.origin)); }
