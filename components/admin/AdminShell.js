@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ROLES, can } from '@/lib/roles';
+import SessionGuard from './SessionGuard';
 
 const I = {
   home: <path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z" />,
@@ -69,6 +70,7 @@ export default function AdminShell({ role, email, counts = {}, children }) {
         </div>
       </aside>
       <main className="ad-main">{children}</main>
+      <SessionGuard email={email} />
     </div>
   );
 }

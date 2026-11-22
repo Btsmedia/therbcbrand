@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { getBrowserClient } from '@/lib/supabase/client';
 
-export default function SignInForm({ next = '/account', title = 'Sign in' }) {
-  const [email, setEmail] = useState('');
+// onSignedIn: sign in without leaving the page (used when an admin's sign-in drops mid-edit)
+export default function SignInForm({ next = '/account', title = 'Sign in', defaultEmail = '', onSignedIn }) {
+  const [email, setEmail] = useState(defaultEmail);
   const [state, setState] = useState('idle');
   const [err, setErr] = useState('');
   const [code, setCode] = useState('');
@@ -17,6 +18,7 @@ export default function SignInForm({ next = '/account', title = 'Sign in' }) {
     const { error } = await sb.auth.verifyOtp({ email, token, type: 'email' });
     if (error) { setChecking(false); setErr('That code didn’t work. Check it, or send a new one.'); return; }
     await sb.rpc('claim_orders');
+    if (onSignedIn) { setChecking(false); setState('idle'); setCode(''); return onSignedIn(); }
     window.location.assign(next.startsWith('/') && !next.startsWith('//') ? next : '/account');
   }
   async function send(e) {
